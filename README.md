@@ -1,8 +1,8 @@
-# @klarui/react
+# klarui-react
 
 Eine moderne, DSGVO-konforme React-Komponenten-Bibliothek für den deutschen Markt.
 
-[![npm version](https://img.shields.io/npm/v/@klarui/react.svg)](https://www.npmjs.com/package/@klarui/react)
+[![npm version](https://img.shields.io/npm/v/klarui-react.svg)](https://www.npmjs.com/package/klarui-react)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
 
 ## ✨ Features
@@ -16,21 +16,23 @@ Eine moderne, DSGVO-konforme React-Komponenten-Bibliothek für den deutschen Mar
 
 ## 📦 Installation
 
+
 ```bash
-npm install @klarui/react
+npm install klarui-react
 ```
 
 Oder mit pnpm:
 
+
 ```bash
-pnpm add @klarui/react
+pnpm add klarui-react
 ```
 
 ## 🚀 Schnellstart
 
 ```jsx
-import { Button } from '@klarui/react';
-import '@klarui/react/styles.css';
+import { Button } from 'klarui-react';
+import 'klarui-react/styles.css';
 
 function App() {
   return (
@@ -87,5 +89,5 @@ MIT © KlarUI
 
 - [Dokumentation](https://klarui.de)
 - [GitHub Repository](https://github.com/nikoitservicedeutschland/klarui)
-- [npm Package](https://www.npmjs.com/package/@klarui/react)
+- [npm Package](https://www.npmjs.com/package/klarui-react)
 - [Issues](https://github.com/nikoitservicedeutschland/klarui/issues)
