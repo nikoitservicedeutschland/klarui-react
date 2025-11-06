@@ -1,0 +1,29 @@
+# Source files
+src/components/
+src/index.js
+*.jsx
+*.tsx
+
+# Build tools
+vite.config.js
+tsconfig.json
+
+# Dependencies
+node_modules/
+pnpm-lock.yaml
+
+# Development files
+.DS_Store
+*.log
+*.swp
+*.swo
+*~
+.vscode/
+.idea/
+
+# Test files
+__tests__/
+*.test.js
+*.spec.js
+test/
+coverage/
