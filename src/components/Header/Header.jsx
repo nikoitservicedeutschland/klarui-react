@@ -48,10 +48,4 @@ function MenuItem({ item }) {
   );
 }
 
-Header.displayName = 'Header';import React from 'react';
-
-export const Header = ({ children, className = '', ...props }) => (
-  <header className={className} {...props}>
-    {children}
-  </header>
-);
+Header.displayName = 'Header';
