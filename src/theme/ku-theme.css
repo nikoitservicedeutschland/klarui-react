@@ -1,0 +1,110 @@
+/* ku-theme.css: Comprehensive theme for ku-react components */
+:root {
+  /* ==========================
+     Primary theme colors
+  ========================== */
+  --ku-color-primary: #007bff;
+  --ku-color-primary-dark: #0056b3;
+  --ku-color-primary-darker: #004085;
+  --ku-color-primary-active: #003366;
+  --ku-color-primary-hover: #0069d9;
+
+  --ku-color-secondary: #6c757d;
+  --ku-color-secondary-dark: #545b62;
+  --ku-color-secondary-darker: #4e555b;
+  --ku-color-secondary-active: #42484e;
+  --ku-color-secondary-hover: #5a6268;
+
+  --ku-color-success: #28a745;
+  --ku-color-success-dark: #218838;
+  --ku-color-success-darker: #1e7e34;
+  --ku-color-success-active: #1c7430;
+  --ku-color-success-hover: #239a3b;
+
+  --ku-color-warning: #ffc107;
+  --ku-color-warning-dark: #e0a800;
+  --ku-color-warning-darker: #d39e00;
+  --ku-color-warning-active: #c69500;
+  --ku-color-warning-hover: #e6b800;
+
+  --ku-color-error: #dc3545;
+  --ku-color-error-dark: #c82333;
+  --ku-color-error-darker: #bd2130;
+  --ku-color-error-active: #b21f2d;
+  --ku-color-error-hover: #d6334f;
+
+  --ku-color-info: #17a2b8;
+  --ku-color-info-dark: #117a8b;
+  --ku-color-info-darker: #0c5460;
+  --ku-color-info-active: #0a3f4d;
+  --ku-color-info-hover: #138496;
+
+  --ku-color-accent: #6610f2;
+  --ku-color-accent-dark: #520dc2;
+  --ku-color-accent-darker: #3d09a0;
+  --ku-color-accent-active: #2e067f;
+  --ku-color-accent-hover: #5a0ee0;
+
+  /* ==========================
+     Neutral / Base colors
+  ========================== */
+  --ku-color-bg: #ffffff;
+  --ku-color-bg-alt: #f8f9fa;
+  --ku-color-bg-dark: #121212; /* dark mode */
+  --ku-color-bg-alt-dark: #1e1e1e;
+  --ku-color-text: #222222;
+  --ku-color-text-muted: #666666;
+  --ku-color-text-dark: #eeeeee; /* dark mode text */
+  --ku-color-link: #007bff;
+  --ku-color-link-hover: #0056b3;
+  --ku-color-border: #e0e7ff;
+  --ku-color-border-dark: #333;
+  --ku-color-shadow: rgba(0, 123, 255, 0.25);
+
+  /* ==========================
+     Utility / states
+  ========================== */
+  --ku-color-disabled: #c0c0c0;
+  --ku-color-placeholder: #999999;
+  --ku-color-focus: #80bdff;
+  --ku-color-focus-outline: rgba(0,123,255,0.25);
+
+  /* ==========================
+     Gradients
+  ========================== */
+  --ku-gradient-primary: linear-gradient(90deg, var(--ku-color-primary), var(--ku-color-primary-dark));
+  --ku-gradient-secondary: linear-gradient(90deg, var(--ku-color-secondary), var(--ku-color-secondary-dark));
+  --ku-gradient-success: linear-gradient(90deg, var(--ku-color-success), var(--ku-color-success-dark));
+  --ku-gradient-warning: linear-gradient(90deg, var(--ku-color-warning), var(--ku-color-warning-dark));
+  --ku-gradient-error: linear-gradient(90deg, var(--ku-color-error), var(--ku-color-error-dark));
+  --ku-gradient-info: linear-gradient(90deg, var(--ku-color-info), var(--ku-color-info-dark));
+  --ku-gradient-accent: linear-gradient(90deg, var(--ku-color-accent), var(--ku-color-accent-dark));
+
+  /* ==========================
+     Shadows / Elevation
+  ========================== */
+  --ku-shadow-sm: 0 1px 2px rgba(0,0,0,0.05);
+  --ku-shadow-md: 0 4px 6px rgba(0,0,0,0.1);
+  --ku-shadow-lg: 0 10px 15px rgba(0,0,0,0.15);
+  --ku-shadow-xl: 0 20px 25px rgba(0,0,0,0.2);
+
+  /* ==========================
+     Border radius
+  ========================== */
+  --ku-radius-sm: 4px;
+  --ku-radius-md: 8px;
+  --ku-radius-lg: 12px;
+  --ku-radius-full: 9999px;
+}
+
+/* ==========================
+   Dark mode support
+========================== */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --ku-color-bg: var(--ku-color-bg-dark);
+    --ku-color-bg-alt: var(--ku-color-bg-alt-dark);
+    --ku-color-text: var(--ku-color-text-dark);
+    --ku-color-border: var(--ku-color-border-dark);
+  }
+}

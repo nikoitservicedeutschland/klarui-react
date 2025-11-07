@@ -4,7 +4,7 @@ import styles from './Button.module.css';
  * Button component with multiple variants and sizes
  * 
  * @param {Object} props
- * @param {'primary' | 'secondary' | 'success' | 'warning' | 'error'} props.variant - Button style variant
+ * @param {'primary' | 'secondary' | 'success' | 'warning' | 'error' | 'info'} props.variant - Button style variant
  * @param {'small' | 'medium' | 'large'} props.size - Button size
  * @param {'none' | 'small' | 'medium' | 'large' | 'full'} props.rounded - Border radius style
  * @param {boolean} props.outline - Use outline style
@@ -19,7 +19,7 @@ import styles from './Button.module.css';
 export const Button = ({
   variant = 'primary',
   size = 'medium',
-  rounded,
+  rounded = 'medium',
   outline = false,
   fullWidth = false,
   disabled = false,
@@ -31,13 +31,13 @@ export const Button = ({
   ...rest
 }) => {
   const classes = [
-    styles.button,
-    styles[size],
-    styles[variant],
-    rounded && styles[`rounded-${rounded}`],
-    outline && styles.outline,
-    fullWidth && styles.fullWidth,
-    className
+    styles['ku-button'],                          // base class
+    styles[`ku-button--${variant}`],             // variant class
+    styles[`ku-button--${size}`],                // size class
+    rounded && styles[`ku-button--rounded-${rounded}`], // rounded class
+    outline && styles['ku-button--outline'],     // outline class
+    fullWidth && styles['ku-button--fullWidth'], // full width
+    className                                    // any extra classes
   ].filter(Boolean).join(' ');
 
   return (
@@ -53,5 +53,3 @@ export const Button = ({
     </button>
   );
 };
-
-Button.displayName = 'Button';

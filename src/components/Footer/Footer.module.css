@@ -1,0 +1,27 @@
+/* Footer CSS module for klarui-react */
+
+.ku-footer-container {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.ku-footer-copyright {
+  margin-bottom: 0.5rem;
+  color: #6c757d;
+}
+
+.ku-footer-links a {
+  color: #007bff;
+  text-decoration: none;
+  margin: 0 0.5rem;
+  font-size: 0.95rem;
+}
+
+.ku-footer-links a:hover {
+  text-decoration: underline;
+}

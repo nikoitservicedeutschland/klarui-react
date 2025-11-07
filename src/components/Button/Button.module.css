@@ -1,5 +1,9 @@
-.button {
-  /* Base button styles */
+@import "../../theme/ku-theme.css";
+
+/* ==========================
+   Base button
+========================== */
+.ku-button {
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -13,197 +17,221 @@
   cursor: pointer;
   user-select: none;
   border: 1px solid transparent;
-  border-radius: 0.375rem;
+  border-radius: var(--ku-radius-md);
   transition: all 0.15s ease-in-out;
   outline: none;
+  background-color: var(--ku-color-bg);
+  color: var(--ku-color-text);
 }
 
-.button:focus-visible {
-  box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.25);
+.ku-button:focus-visible {
+  box-shadow: 0 0 0 3px var(--ku-color-focus-outline);
 }
 
-.button:disabled {
+.ku-button:disabled {
   opacity: 0.65;
   cursor: not-allowed;
+  background: var(--ku-color-disabled);
+  border-color: var(--ku-color-disabled);
 }
 
-/* Sizes */
-.small {
+/* ==========================
+   Sizes
+========================== */
+.ku-button--small {
   padding: 0.25rem 0.5rem;
   font-size: 0.875rem;
-  border-radius: 0.25rem;
+  border-radius: var(--ku-radius-sm);
 }
 
-.medium {
+.ku-button--medium {
   padding: 0.5rem 1rem;
   font-size: 1rem;
 }
 
-.large {
+.ku-button--large {
   padding: 0.75rem 1.5rem;
   font-size: 1.125rem;
-  border-radius: 0.5rem;
+  border-radius: var(--ku-radius-lg);
 }
 
-/* Variants */
-.primary {
+/* ==========================
+   Variants
+========================== */
+.ku-button--primary {
   color: #fff;
-  background-color: #007bff;
-  border-color: #007bff;
+  background-color: var(--ku-color-primary);
+  border-color: var(--ku-color-primary);
+}
+.ku-button--primary:hover:not(:disabled) {
+  background-color: var(--ku-color-primary-hover);
+  border-color: var(--ku-color-primary-dark);
+}
+.ku-button--primary:active:not(:disabled) {
+  background-color: var(--ku-color-primary-active);
+  border-color: var(--ku-color-primary-darker);
 }
 
-.primary:hover:not(:disabled) {
-  background-color: #0056b3;
-  border-color: #004085;
-}
-
-.primary:active:not(:disabled) {
-  background-color: #004085;
-  border-color: #003366;
-}
-
-.secondary {
+.ku-button--secondary {
   color: #fff;
-  background-color: #6c757d;
-  border-color: #6c757d;
+  background-color: var(--ku-color-secondary);
+  border-color: var(--ku-color-secondary);
+}
+.ku-button--secondary:hover:not(:disabled) {
+  background-color: var(--ku-color-secondary-hover);
+  border-color: var(--ku-color-secondary-dark);
+}
+.ku-button--secondary:active:not(:disabled) {
+  background-color: var(--ku-color-secondary-active);
+  border-color: var(--ku-color-secondary-darker);
 }
 
-.secondary:hover:not(:disabled) {
-  background-color: #545b62;
-  border-color: #4e555b;
-}
-
-.secondary:active:not(:disabled) {
-  background-color: #4e555b;
-  border-color: #42484e;
-}
-
-.success {
+.ku-button--success {
   color: #fff;
-  background-color: #28a745;
-  border-color: #28a745;
+  background-color: var(--ku-color-success);
+  border-color: var(--ku-color-success);
+}
+.ku-button--success:hover:not(:disabled) {
+  background-color: var(--ku-color-success-hover);
+  border-color: var(--ku-color-success-dark);
+}
+.ku-button--success:active:not(:disabled) {
+  background-color: var(--ku-color-success-active);
+  border-color: var(--ku-color-success-darker);
 }
 
-.success:hover:not(:disabled) {
-  background-color: #218838;
-  border-color: #1e7e34;
-}
-
-.success:active:not(:disabled) {
-  background-color: #1e7e34;
-  border-color: #1c7430;
-}
-
-.warning {
+.ku-button--warning {
   color: #212529;
-  background-color: #ffc107;
-  border-color: #ffc107;
+  background-color: var(--ku-color-warning);
+  border-color: var(--ku-color-warning);
+}
+.ku-button--warning:hover:not(:disabled) {
+  background-color: var(--ku-color-warning-hover);
+  border-color: var(--ku-color-warning-dark);
+}
+.ku-button--warning:active:not(:disabled) {
+  background-color: var(--ku-color-warning-active);
+  border-color: var(--ku-color-warning-darker);
 }
 
-.warning:hover:not(:disabled) {
-  background-color: #e0a800;
-  border-color: #d39e00;
-}
-
-.warning:active:not(:disabled) {
-  background-color: #d39e00;
-  border-color: #c69500;
-}
-
-.error {
+.ku-button--error {
   color: #fff;
-  background-color: #dc3545;
-  border-color: #dc3545;
+  background-color: var(--ku-color-error);
+  border-color: var(--ku-color-error);
+}
+.ku-button--error:hover:not(:disabled) {
+  background-color: var(--ku-color-error-hover);
+  border-color: var(--ku-color-error-dark);
+}
+.ku-button--error:active:not(:disabled) {
+  background-color: var(--ku-color-error-active);
+  border-color: var(--ku-color-error-darker);
 }
 
-.error:hover:not(:disabled) {
-  background-color: #c82333;
-  border-color: #bd2130;
+.ku-button--info {
+  color: #fff;
+  background-color: var(--ku-color-info);
+  border-color: var(--ku-color-info);
+}
+.ku-button--info:hover:not(:disabled) {
+  background-color: var(--ku-color-info-hover);
+  border-color: var(--ku-color-info-dark);
+}
+.ku-button--info:active:not(:disabled) {
+  background-color: var(--ku-color-info-active);
+  border-color: var(--ku-color-info-darker);
 }
 
-.error:active:not(:disabled) {
-  background-color: #bd2130;
-  border-color: #b21f2d;
-}
-
-.outline {
+/* ==========================
+   Outline variants
+========================== */
+.ku-button--outline {
   color: currentColor;
   background-color: transparent;
 }
 
-.outline.primary {
-  color: #007bff;
-  border-color: #007bff;
+.ku-button--outline.ku-button--primary {
+  color: var(--ku-color-primary);
+  border-color: var(--ku-color-primary);
 }
-
-.outline.primary:hover:not(:disabled) {
+.ku-button--outline.ku-button--primary:hover:not(:disabled) {
   color: #fff;
-  background-color: #007bff;
+  background-color: var(--ku-color-primary);
 }
 
-.outline.secondary {
-  color: #6c757d;
-  border-color: #6c757d;
+/* مشابه برای بقیه outline ها */
+.ku-button--outline.ku-button--secondary {
+  color: var(--ku-color-secondary);
+  border-color: var(--ku-color-secondary);
 }
-
-.outline.secondary:hover:not(:disabled) {
+.ku-button--outline.ku-button--secondary:hover:not(:disabled) {
   color: #fff;
-  background-color: #6c757d;
+  background-color: var(--ku-color-secondary);
 }
 
-.outline.success {
-  color: #28a745;
-  border-color: #28a745;
+.ku-button--outline.ku-button--success {
+  color: var(--ku-color-success);
+  border-color: var(--ku-color-success);
 }
-
-.outline.success:hover:not(:disabled) {
+.ku-button--outline.ku-button--success:hover:not(:disabled) {
   color: #fff;
-  background-color: #28a745;
+  background-color: var(--ku-color-success);
 }
 
-.outline.warning {
-  color: #ffc107;
-  border-color: #ffc107;
+.ku-button--outline.ku-button--warning {
+  color: var(--ku-color-warning);
+  border-color: var(--ku-color-warning);
 }
-
-.outline.warning:hover:not(:disabled) {
+.ku-button--outline.ku-button--warning:hover:not(:disabled) {
   color: #212529;
-  background-color: #ffc107;
+  background-color: var(--ku-color-warning);
 }
 
-.outline.error {
-  color: #dc3545;
-  border-color: #dc3545;
+.ku-button--outline.ku-button--error {
+  color: var(--ku-color-error);
+  border-color: var(--ku-color-error);
 }
-
-.outline.error:hover:not(:disabled) {
+.ku-button--outline.ku-button--error:hover:not(:disabled) {
   color: #fff;
-  background-color: #dc3545;
+  background-color: var(--ku-color-error);
 }
 
-/* Full width */
-.fullWidth {
-  display: flex;
+.ku-button--outline.ku-button--info {
+  color: var(--ku-color-info);
+  border-color: var(--ku-color-info);
+}
+.ku-button--outline.ku-button--info:hover:not(:disabled) {
+  color: #fff;
+  background-color: var(--ku-color-info);
+}
+
+/* ==========================
+   Full width
+========================== */
+.ku-button--fullWidth {
   width: 100%;
+  display: flex;
 }
 
-/* Rounded variants */
-.rounded-none {
+/* ==========================
+   Rounded variants
+========================== */
+.ku-button--rounded-none {
   border-radius: 0;
 }
 
-.rounded-small {
-  border-radius: 0.25rem;
+.ku-button--rounded-small {
+  border-radius: var(--ku-radius-sm);
 }
 
-.rounded-medium {
-  border-radius: 0.375rem;
+.ku-button--rounded-medium {
+  border-radius: var(--ku-radius-md);
 }
 
-.rounded-large {
-  border-radius: 0.75rem;
+.ku-button--rounded-large {
+  border-radius: var(--ku-radius-lg);
 }
 
-.rounded-full {
-  border-radius: 9999px;
+.ku-button--rounded-full {
+  border-radius: var(--ku-radius-full);
 }
