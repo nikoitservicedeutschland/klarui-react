@@ -28,13 +28,14 @@ export const Header = ({
   const headerStyles = [
     styles.header_kui,
     styles[`fixed_${position}`],
-    className
+    className,
+    'klarui-header'
   ].filter(Boolean).join(' ');
   const navStyles = {
     width: WIDTH_MAP[width] || width
   };
   return (
-    <header className={headerStyles} {...props}>
+    <header className={headerStyles} data-klarui="true" {...props}>
       <div className={styles.menuToggle_kui}>
         <button
           className={styles.hamburger_kui}
