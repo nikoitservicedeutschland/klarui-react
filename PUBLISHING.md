@@ -1,4 +1,4 @@
-# Publishing Guide for @klarui/react
+# Publishing Guide for @klarui-react
 
 ## Prerequisites
 
@@ -17,7 +17,7 @@
 
 ### 1. Verify package name is available
 ```bash
-npm view @klarui/react
+npm view @klarui-react
 ```
 If you get "npm ERR! 404 Not Found", the name is available! ✅
 
@@ -42,7 +42,7 @@ Should see:
 
 ### First Time Setup (if using scoped package @klarui)
 
-Since `@klarui/react` is a scoped package, you need to either:
+Since `@klarui-react` is a scoped package, you need to either:
 
 **Option 1: Publish as public (FREE)**
 ```bash
@@ -54,7 +54,7 @@ npm publish --access public
 Edit `package.json`:
 ```json
 {
-  "name": "klarui-react",  // Instead of @klarui/react
+  "name": "klarui-react",  // Instead of @klarui-react
   ...
 }
 ```
@@ -85,7 +85,7 @@ Edit `package.json`:
 
 4. **Verify it's published**:
    ```bash
-   npm view @klarui/react
+   npm view @klarui-react
    ```
 
 ## After Publishing
@@ -93,7 +93,7 @@ Edit `package.json`:
 1. **Test installation**:
    ```bash
    # In a test project
-   npm install @klarui/react
+   npm install @klarui-react
    ```
 
 2. **Add npm badge to README** (already included)
@@ -120,7 +120,7 @@ Edit `package.json`:
 
 You can unpublish within 72 hours:
 ```bash
-npm unpublish @klarui/react@0.1.0
+npm unpublish @klarui-react@0.1.0
 ```
 
 ## Automated Publishing with GitHub Actions
