@@ -1,4 +1,5 @@
-import React from 'react';
+
+import React, { useState } from 'react';
 import styles from './Header.module.css';
 import * as LucideIcons from 'lucide-react';
 
@@ -7,24 +8,64 @@ function getIcon(name) {
   return Icon ? <Icon size={20} /> : null;
 }
 
-export const Header = ({ menuItems = [], className = '', ...props }) => (
-  <header className={styles.header_kui + ' ' + className} {...props}>
-    <nav className={styles.menu_kui}>
-      <ul className={styles.menuList_kui}>
-        {menuItems.map((item, idx) => (
-          <MenuItem key={idx} item={item} />
-        ))}
-      </ul>
-    </nav>
-  </header>
-);
+const WIDTH_MAP = {
+  'full': '100%',
+  '25': '25%',
+  '50': '50%',
+  '75': '75%',
+  '100': '100%'
+};
 
-function MenuItem({ item }) {
+export const Header = ({
+  menuItems = [],
+  className = '',
+  position = 'top', // top, bottom, left, right
+  width = 'full', // full, 25, 50, 75, 100
+  activeClass = '', // custom class for active item underline
+  ...props
+}) => {
+  const [mobileOpen, setMobileOpen] = useState(false);
+  const headerStyles = [
+    styles.header_kui,
+    styles[`fixed_${position}`],
+    className
+  ].filter(Boolean).join(' ');
+  const navStyles = {
+    width: WIDTH_MAP[width] || width
+  };
+  return (
+    <header className={headerStyles} {...props}>
+      <div className={styles.menuToggle_kui}>
+        <button
+          className={styles.hamburger_kui}
+          aria-label="Toggle menu"
+          onClick={() => setMobileOpen((open) => !open)}
+        >
+          <LucideIcons.Menu size={24} />
+        </button>
+      </div>
+      <nav className={styles.menu_kui} style={navStyles} data-open={mobileOpen}>
+        <ul className={styles.menuList_kui}>
+          {menuItems.map((item, idx) => (
+            <MenuItem key={idx} item={item} activeClass={activeClass} />
+          ))}
+        </ul>
+      </nav>
+    </header>
+  );
+};
+
+function MenuItem({ item, activeClass }) {
   const hasSubmenus = Array.isArray(item.submenus) && item.submenus.length > 0;
   const isActive = !!item.active;
   return (
     <li className={
-      `${styles.menuItem_kui} ${isActive ? styles.active_kui : ''} ${hasSubmenus ? styles.hasSubmenu_kui : ''}`
+      [
+        styles.menuItem_kui,
+        isActive ? styles.active_kui : '',
+        isActive && activeClass ? activeClass : '',
+        hasSubmenus ? styles.hasSubmenu_kui : ''
+      ].filter(Boolean).join(' ')
     }>
       {item.link ? (
         <a href={item.link} className={styles.menuLink_kui}>
@@ -40,7 +81,7 @@ function MenuItem({ item }) {
       {hasSubmenus && (
         <ul className={styles.submenuList_kui}>
           {item.submenus.map((sub, idx) => (
-            <MenuItem key={idx} item={sub} />
+            <MenuItem key={idx} item={sub} activeClass={activeClass} />
           ))}
         </ul>
       )}
