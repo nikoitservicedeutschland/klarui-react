@@ -1,2 +1,2 @@
 // Main entry point for @klarui/react
-export { Button } from './Button';
+export { default } from './Button.jsx';
