@@ -1,6 +1,6 @@
 {
   "name": "klarui-react",
-  "version": "0.1.23",
+  "version": "0.1.24",
   "description": "German-compliant React UI component library",
   "type": "module",
   "main": "./dist/index.cjs",
@@ -9,8 +9,7 @@
   "exports": {
   ".": {
     "import": "./dist/index.js",
-    "require": "./dist/index.cjs",
-    "types": "./dist/index.d.ts"
+    "require": "./dist/index.cjs"
   },
   "./styles.css": {
     "default": "./dist/styles.css"
