@@ -1,2 +1,1 @@
-export default Button;
-export { Button };
+export { default } from './Button.jsx';
