@@ -11,7 +11,7 @@
     "isolatedModules": true,
     "declaration": true,
     "emitDeclarationOnly": true,
-    "outDir": "./dist",
+    "outDir": "dist-old",
     "jsx": "react-jsx",
     "strict": true,
     "noUnusedLocals": true,
