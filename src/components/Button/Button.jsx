@@ -35,13 +35,13 @@ const Button = ({
     styles[`ku-button--${variant}`],             // variant class
     styles[`ku-button--${size}`],                // size class
     rounded && styles[`ku-button--rounded-${rounded}`], // rounded class
-    outline && styles['ku-button--outline'],     // outline class
+    outline && styles['ku-button--outline'],     // outline class 
     fullWidth && styles['ku-button--fullWidth'], // full width
     className                                    // any extra classes
   ].filter(Boolean).join(' ');
 
   return (
-    <button
+    <button 
       type={type}
       className={classes}
       style={style}
