@@ -1,3 +1,5 @@
+
+import PropTypes from 'prop-types';
 // Layout uses global CSS classes from styles.css
 
 export const Layout = ({

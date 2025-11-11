@@ -1,6 +1,6 @@
 {
   "name": "klarui-react",
-  "version": "0.1.27",
+  "version": "0.1.28",
   "description": "German-compliant React UI component library",
   "type": "module",
   "main": "./dist/index.cjs",
