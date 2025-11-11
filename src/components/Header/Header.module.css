@@ -1,23 +1,99 @@
-.header {
+/* Base */
+.ku-header {
   width: 100%;
   background: #fff;
   box-shadow: 0 2px 8px rgba(0,0,0,0.04);
-  padding: 0.5rem 1rem;
   z-index: 100;
 }
-.fixedTop { position: fixed; top: 0; left: 0; right: 0; }
-.fixedBottom { position: fixed; bottom: 0; left: 0; right: 0; }
-.fixedLeft { position: fixed; top: 0; left: 0; bottom: 0; width: 250px; height: 100vh; z-index: 101; }
-.fixedRight { position: fixed; top: 0; right: 0; bottom: 0; width: 250px; height: 100vh; z-index: 101; }
-.menuToggle { display: none; }
-.hamburger { background: none; border: none; cursor: pointer; padding: 0.5rem; display: flex; align-items: center; }
-.active { background: #e0e7ff; color: #3b82f6; position: relative; }
-.underline { border-bottom: 2px solid #3b82f6; }
-.menu { display: flex; flex-direction: row; justify-content: flex-start; align-items: center; width: 100%; }
-.menuList { display: flex; flex-wrap: wrap; gap: 0.5rem; list-style: none; margin: 0; padding: 0; width: 100%; }
-.menuItem { position: relative; min-width: 80px; padding: 0.5rem 1rem; border-radius: 6px; transition: background 0.2s; background: transparent; }
-.menuItemHover:hover { background: #f0f4f8; }
-.menuLink { display: flex; align-items: center; gap: 0.5rem; color: #222; text-decoration: none; font-weight: 500; font-size: 1rem; }
-.hasSubmenu > .menuLink::after { content: '\25BC'; font-size: 0.7em; margin-left: 0.3em; }
-.submenuList { position: absolute; left: 0; top: 100%; min-width: 120px; background: #fff; box-shadow: 0 2px 8px rgba(0,0,0,0.08); border-radius: 6px; padding: 0.5rem 0; display: none; flex-direction: column; z-index: 200; }
-.menuItemHover:hover > .submenuList { display: flex; }
+.ku-fixedTop { position: fixed; top: 0; left: 0; right: 0; }
+.ku-fixedBottom { position: fixed; bottom: 0; left: 0; right: 0; }
+.ku-fixedLeft { position: fixed; top: 0; left: 0; bottom: 0; width: 250px; height: 100vh; z-index: 101; }
+.ku-fixedRight { position: fixed; top: 0; right: 0; bottom: 0; width: 250px; height: 100vh; z-index: 101; }
+
+.ku-headerContent {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.5rem 1rem;
+}
+
+.ku-logo { font-weight: 700; font-size: 1.25rem; }
+
+.ku-menuToggle { display: none; }
+.ku-hamburger { background: none; border: none; cursor: pointer; padding: 0.5rem; display: flex; align-items: center; }
+
+.ku-menu {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 0.5rem;
+}
+.ku-menuOpen { display: flex; }
+.ku-menuList {
+  display: flex;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  gap: 0.5rem;
+}
+.ku-menuItem {
+  position: relative;
+  border-radius: 0.375rem;
+  padding: 0.5rem 1rem;
+  transition: background 0.2s;
+}
+.ku-menuItem:hover { background: #f0f4f8; }
+
+.ku-menuLink {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: #222;
+  text-decoration: none;
+  font-weight: 500;
+}
+.ku-active { background: #e0e7ff; color: #3b82f6; }
+
+.ku-hasSubmenu > .ku-menuLink::after {
+  content: '\25BC';
+  font-size: 0.7em;
+  margin-left: 0.3em;
+}
+.ku-submenuList {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background: #fff;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  border-radius: 0.375rem;
+  padding: 0.5rem 0;
+  display: none;
+  flex-direction: column;
+  z-index: 200;
+}
+.ku-menuItem:hover > .ku-submenuList { display: flex; }
+
+/* Responsive */
+@media (max-width: 768px) {
+  .ku-menuToggle { display: block; }
+  .ku-menu {
+    display: none;
+    flex-direction: column;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background: #fff;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+    border-radius: 0 0 0.5rem 0.5rem;
+    padding: 0.5rem 1rem;
+  }
+  .ku-menu.ku-menuOpen { display: flex; }
+  .ku-menuList { flex-direction: column; gap: 0; }
+  .ku-menuItem { width: 100%; }
+  .ku-submenuList { position: static; box-shadow: none; padding: 0.25rem 0; }
+}
+
+@media (min-width: 769px) and (max-width: 1024px) { .ku-menuList { gap: 0.25rem; } }
+@media (min-width: 1025px) and (max-width: 1440px) { .ku-menuList { gap: 0.5rem; } }
+@media (min-width: 1441px) { .ku-menuList { gap: 1rem; } }

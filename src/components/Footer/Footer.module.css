@@ -1,27 +1,26 @@
-/* Footer CSS module for klarui-react */
+/* Footer.module.css */
 
-.ku-footer-container {
+.ku-footer {
   width: 100%;
-  max-width: 1200px;
-  margin: 0 auto;
+  background: #fff;
+  border-top: 1px solid #e5e7eb;
+  padding: 1rem;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-}
-
-.ku-footer-copyright {
-  margin-bottom: 0.5rem;
   color: #6c757d;
-}
-
-.ku-footer-links a {
-  color: #007bff;
-  text-decoration: none;
-  margin: 0 0.5rem;
   font-size: 0.95rem;
 }
 
-.ku-footer-links a:hover {
+.ku-footer a {
+  color: #007bff;
+  text-decoration: none;
+  margin: 0 0.5rem;
+  transition: color 0.2s;
+}
+
+.ku-footer a:hover {
+  color: #0056b3;
   text-decoration: underline;
 }

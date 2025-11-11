@@ -1,6 +1,5 @@
-
 import PropTypes from 'prop-types';
-// Layout uses global CSS classes from styles.css
+import styles from './Layout.module.css';
 
 export const Layout = ({
   children,
@@ -11,9 +10,16 @@ export const Layout = ({
   className = '',
   ...props
 }) => {
+  const classes = [
+    styles.kuLayout,
+    styles[`kuLayout${theme.charAt(0).toUpperCase() + theme.slice(1)}`],
+    showSidebar && styles.kuWithSidebar,
+    className
+  ].filter(Boolean).join(' ');
+
   return (
     <div
-      className={`ku-layout ku-layout--${theme} ku-layout--${variant} ${showSidebar ? 'ku-with-sidebar' : ''} ${className}`.trim()}
+      className={classes}
       style={{ maxWidth: containerWidth, margin: '0 auto', padding: '2rem' }}
       {...props}
     >
@@ -30,7 +36,6 @@ Layout.propTypes = {
   variant: PropTypes.string,
   className: PropTypes.string,
 };
-
 
 Layout.displayName = 'Layout';
 export default Layout;
