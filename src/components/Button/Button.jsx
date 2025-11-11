@@ -16,7 +16,7 @@ import styles from './Button.module.css';
  * @param {string} props.className - Additional CSS classes
  * @param {Object} props.style - Inline styles for custom styling
  */
-export const Button = ({
+const Button = ({
   variant = 'primary',
   size = 'medium',
   rounded = 'medium',
@@ -53,3 +53,6 @@ export const Button = ({
     </button>
   );
 };
+
+Button.displayName = 'Button';
+export default Button;

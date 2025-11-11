@@ -36,4 +36,6 @@ Layout.propTypes = {
   theme: PropTypes.string,
 };
 
+
 Layout.displayName = 'Layout';
+export default Layout;
