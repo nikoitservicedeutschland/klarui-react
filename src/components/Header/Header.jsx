@@ -1,6 +1,6 @@
 
 import React, { useState } from 'react';
-import styles from './Header.module.css';
+// Header uses global CSS classes from styles.css
 import * as LucideIcons from 'lucide-react';
 
 function getIcon(name) {
@@ -26,8 +26,8 @@ export const Header = ({
 }) => {
   const [mobileOpen, setMobileOpen] = useState(false);
   const headerStyles = [
-    styles['ku-header'],
-    styles[`ku-fixed-${position}`],
+    'ku-header',
+    `ku-fixed-${position}`,
     className,
     'klarui-header'
   ].filter(Boolean).join(' ');
@@ -36,17 +36,17 @@ export const Header = ({
   };
   return (
     <header className={headerStyles} data-klarui="true" {...props}>
-      <div className={styles['ku-menu-toggle']}>
+      <div className="ku-menu-toggle">
         <button
-          className={styles['ku-hamburger']}
+          className="ku-hamburger"
           aria-label="Toggle menu"
           onClick={() => setMobileOpen((open) => !open)}
         >
           <LucideIcons.Menu size={24} />
         </button>
       </div>
-      <nav className={styles['ku-menu']} style={navStyles} data-open={mobileOpen}>
-        <ul className={styles['ku-menu-list']}>
+      <nav className="ku-menu" style={navStyles} data-open={mobileOpen}>
+        <ul className="ku-menu-list">
           {menuItems.map((item, idx) => (
             <MenuItem key={idx} item={item} activeClass={activeClass} />
           ))}
@@ -62,25 +62,25 @@ function MenuItem({ item, activeClass }) {
   return (
     <li className={
       [
-        styles['ku-menu-item'],
-        isActive ? styles['ku-active'] : '',
+        'ku-menu-item',
+        isActive ? 'ku-active' : '',
         isActive && activeClass ? activeClass : '',
-        hasSubmenus ? styles['ku-has-submenu'] : ''
+        hasSubmenus ? 'ku-has-submenu' : ''
       ].filter(Boolean).join(' ')
     }>
       {item.link ? (
-        <a href={item.link} className={styles['ku-menu-link']}>
+  <a href={item.link} className="ku-menu-link">
           {item.icon && getIcon(item.icon)}
           <span>{item.label}</span>
         </a>
       ) : (
-        <span className={styles['ku-menu-link']}>
+  <span className="ku-menu-link">
           {item.icon && getIcon(item.icon)}
           <span>{item.label}</span>
         </span>
       )}
       {hasSubmenus && (
-        <ul className={styles['ku-submenu-list']}>
+  <ul className="ku-submenu-list">
           {item.submenus.map((sub, idx) => (
             <MenuItem key={idx} item={sub} activeClass={activeClass} />
           ))}

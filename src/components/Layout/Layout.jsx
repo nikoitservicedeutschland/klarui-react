@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import styles from './Layout.module.css';
+// Layout uses global CSS classes from styles.css
 import Header from '../Header';
 import Footer from '../Footer';
 
@@ -12,17 +12,17 @@ export const Layout = ({
   ...props
 }) => {
   return (
-    <div className={`${styles['ku-layout']} ${styles[`ku-layout--${theme}`] || ''} ${showSidebar ? styles['ku-with-sidebar'] : ''}`} {...props}>
-      <header className={styles['ku-layout-header']}>
+  <div className={`ku-layout ku-layout--${theme} ${showSidebar ? 'ku-with-sidebar' : ''}`} {...props}>
+  <header className="ku-layout-header">
         <Header />
       </header>
       <main
-        className={styles['ku-layout-body']}
+        className="ku-layout-body"
         style={{ maxWidth: containerWidth, margin: '0 auto', padding: '2rem' }}
       >
         {children}
       </main>
-      <footer className={styles['ku-layout-footer']}>
+  <footer className="ku-layout-footer">
         <Footer />
       </footer>
     </div>
