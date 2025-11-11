@@ -1,1 +1,1 @@
-export { default } from './Footer.jsx';
+export {Footer} from './Footer';
