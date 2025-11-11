@@ -25,7 +25,7 @@ export default defineConfig({
         }
       }
     },
-    cssCodeSplit: false,
+    cssCodeSplit: true,
     sourcemap: true
   }
 });
