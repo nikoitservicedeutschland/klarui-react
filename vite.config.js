@@ -18,7 +18,10 @@ export default defineConfig({
           react: 'React',
           'react-dom': 'ReactDOM'
         },
-        assetFileNames: '[name][extname]' // نام CSS اصلی حفظ می‌شود
+        assetFileNames: (assetInfo) => {
+          if (assetInfo.name && assetInfo.name.endsWith('.css')) return 'styles.css';
+          return assetInfo.name;
+        }
       }
     },
     cssCodeSplit: true,
