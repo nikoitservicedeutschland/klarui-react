@@ -1,7 +1,8 @@
 
+
 export const Footer = () => (
-  <footer className={styles['ku-footer']}>
-    <div className={styles['ku-footer-content']}>
+  <footer>
+    <div className={styles['ku-footer-container']}>
       <span className={styles['ku-footer-copyright']}>
         &copy; {new Date().getFullYear()} KlarUI. Alle Rechte vorbehalten.
       </span>

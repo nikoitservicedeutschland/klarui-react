@@ -12,7 +12,7 @@ export const Layout = ({
   ...props
 }) => {
   return (
-    <div className={`${styles['ku-layout']} ${styles[`ku-layout--${theme}`]} ${showSidebar ? styles['ku-with-sidebar'] : ''}`} {...props}>
+    <div className={`${styles['ku-layout']} ${styles[`ku-layout--${theme}`] || ''} ${showSidebar ? styles['ku-with-sidebar'] : ''}`} {...props}>
       <header className={styles['ku-layout-header']}>
         <Header />
       </header>

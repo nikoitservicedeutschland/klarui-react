@@ -26,8 +26,8 @@ export const Header = ({
 }) => {
   const [mobileOpen, setMobileOpen] = useState(false);
   const headerStyles = [
-    styles.header_kui,
-    styles[`fixed_${position}`],
+    styles['ku-header'],
+    styles[`ku-fixed-${position}`],
     className,
     'klarui-header'
   ].filter(Boolean).join(' ');
@@ -36,17 +36,17 @@ export const Header = ({
   };
   return (
     <header className={headerStyles} data-klarui="true" {...props}>
-      <div className={styles.menuToggle_kui}>
+      <div className={styles['ku-menu-toggle']}>
         <button
-          className={styles.hamburger_kui}
+          className={styles['ku-hamburger']}
           aria-label="Toggle menu"
           onClick={() => setMobileOpen((open) => !open)}
         >
           <LucideIcons.Menu size={24} />
         </button>
       </div>
-      <nav className={styles.menu_kui} style={navStyles} data-open={mobileOpen}>
-        <ul className={styles.menuList_kui}>
+      <nav className={styles['ku-menu']} style={navStyles} data-open={mobileOpen}>
+        <ul className={styles['ku-menu-list']}>
           {menuItems.map((item, idx) => (
             <MenuItem key={idx} item={item} activeClass={activeClass} />
           ))}
@@ -62,25 +62,25 @@ function MenuItem({ item, activeClass }) {
   return (
     <li className={
       [
-        styles.menuItem_kui,
-        isActive ? styles.active_kui : '',
+        styles['ku-menu-item'],
+        isActive ? styles['ku-active'] : '',
         isActive && activeClass ? activeClass : '',
-        hasSubmenus ? styles.hasSubmenu_kui : ''
+        hasSubmenus ? styles['ku-has-submenu'] : ''
       ].filter(Boolean).join(' ')
     }>
       {item.link ? (
-        <a href={item.link} className={styles.menuLink_kui}>
+        <a href={item.link} className={styles['ku-menu-link']}>
           {item.icon && getIcon(item.icon)}
           <span>{item.label}</span>
         </a>
       ) : (
-        <span className={styles.menuLink_kui}>
+        <span className={styles['ku-menu-link']}>
           {item.icon && getIcon(item.icon)}
           <span>{item.label}</span>
         </span>
       )}
       {hasSubmenus && (
-        <ul className={styles.submenuList_kui}>
+        <ul className={styles['ku-submenu-list']}>
           {item.submenus.map((sub, idx) => (
             <MenuItem key={idx} item={sub} activeClass={activeClass} />
           ))}
