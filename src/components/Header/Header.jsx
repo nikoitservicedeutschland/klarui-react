@@ -90,4 +90,6 @@ function MenuItem({ item, activeClass }) {
   );
 }
 
+
 Header.displayName = 'Header';
+export default Header;
