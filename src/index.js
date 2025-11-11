@@ -1,5 +1,5 @@
 // Main entry point for @klarui/react
-export { default as Button } from './components/Button';
-export { default as Header } from './components/Header';
-export { default as Layout } from './components/Layout';
-export { default as Footer } from './components/Footer';
+export { Button } from './components/Button';
+export { Header } from './components/Header';
+export { Layout } from './components/Layout';
+export { Footer } from './components/Footer';
