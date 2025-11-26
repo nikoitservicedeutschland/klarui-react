@@ -8,8 +8,9 @@ export default defineConfig({
     react(),
     copy({
       targets: [
-        { src: 'src/styles/*', dest: 'dist/styles' },
-        { src: 'src/animations/*', dest: 'dist/animations' }
+        { src: 'src/styles/styles.css', dest: 'dist/' },
+        { src: 'src/styles/animations.css', dest: 'dist/' },
+        { src: ['src/styles/*', '!src/styles/styles.css' , '!src/styles/animations.css'], dest: 'dist/styles' }
       ],
       hook: 'writeBundle'
     })
