@@ -6,34 +6,34 @@
 /* ------------------------------------- */
 /* Reset / Normalize */
 /* ------------------------------------- */
-@import './reset.css';
+@import './styles/reset.css';
 
 /* ------------------------------------- */
 /* Typography */
 /* ------------------------------------- */
-@import './typography.css';
+@import './styles/typography.css';
 
 /* ------------------------------------- */
 /* Layout */
 /* ------------------------------------- */
-@import './layout.css';
+@import './styles/layout.css';
 
 /* ------------------------------------- */
 /* Colors */
 /* ------------------------------------- */
-@import './colors.css';
+@import './styles/colors.css';
 
 /* ------------------------------------- */
 /* Utilities */
 /* ------------------------------------- */
-@import './utilities.css';
+@import './styles/utilities.css';
 
 /* ------------------------------------- */
 /* Responsive Settings (Optional) */
 /* ------------------------------------- */
-@import './responsive.css';
+@import './styles/responsive.css';
 
 /* ------------------------------------- */
 /* Helper Classes (Optional) */
 /* ------------------------------------- */
-@import './helpers.css';
+@import './styles/helpers.css';
