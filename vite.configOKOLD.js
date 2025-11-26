@@ -1,19 +1,9 @@
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
 import { resolve } from 'path';
-import copy from 'rollup-plugin-copy';
 
 export default defineConfig({
-  plugins: [
-    react(),
-    copy({
-      targets: [
-        { src: 'src/styles/*', dest: 'dist/styles' },
-        { src: 'src/animations/*', dest: 'dist/animations' }
-      ],
-      hook: 'writeBundle'
-    })
-  ],
+  plugins: [react()],
   build: {
     lib: {
       entry: resolve(__dirname, 'src/index.js'),
@@ -27,6 +17,10 @@ export default defineConfig({
         globals: {
           react: 'React',
           'react-dom': 'ReactDOM'
+        },
+        assetFileNames: (assetInfo) => {
+          if (assetInfo.name && assetInfo.name.endsWith('.css')) return 'styles.css';
+          return assetInfo.name;
         }
       }
     },

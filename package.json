@@ -1,21 +1,23 @@
 {
   "name": "klarui-react",
-  "version": "0.1.32",
+  "version": "0.1.33",
   "description": "German-compliant React UI component library",
   "type": "module",
   "main": "./dist/index.cjs",
   "module": "./dist/index.js",
   "types": "./dist/index.d.ts",
   "exports": {
-  ".": {
-    "import": "./dist/index.js",
-    "require": "./dist/index.cjs"
+    ".": {
+      "import": "./dist/index.js",
+      "require": "./dist/index.cjs"
+    },
+    "./styles.css": {
+      "default": "./dist/styles.css"
+    },
+    "./animations.css": {
+      "default": "./dist/animations.css"
+    }
   },
-  "./styles.css": {
-    "default": "./dist/styles.css"
-  },
-  "./animations.css": "./src/animations/animations.css"
-},
   "files": [
     "dist",
     "src/animations"
@@ -61,6 +63,7 @@
     "@types/react": "^19.0.0",
     "@types/react-dom": "^19.0.0",
     "@vitejs/plugin-react": "^4.3.4",
+    "rollup-plugin-copy": "^3.5.0",
     "typescript": "^5.7.2",
     "vite": "^7.2.0",
     "vite-plugin-dts": "^4.3.0"
