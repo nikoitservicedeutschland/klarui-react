@@ -1,0 +1,43 @@
+/* Base Stack – Mobile First */
+.stack {
+  display: flex;
+  flex-direction: column; /* default vertical stack */
+  gap: 1rem; /* default 16px gap between items */
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* Horizontal stack */
+.stack-row {
+  flex-direction: row;
+  flex-wrap: wrap; /* allow wrapping in small widths */
+}
+
+/* Responsive stack directions – Mobile First */
+@media (min-width: 640px) { /* sm */
+  .sm-stack-row { flex-direction: row; flex-wrap: wrap; }
+}
+@media (min-width: 768px) { /* md */
+  .md-stack-row { flex-direction: row; flex-wrap: wrap; }
+}
+@media (min-width: 1024px) { /* lg */
+  .lg-stack-row { flex-direction: row; flex-wrap: wrap; }
+}
+@media (min-width: 1280px) { /* xl */
+  .xl-stack-row { flex-direction: row; flex-wrap: wrap; }
+}
+@media (min-width: 1536px) { /* 2xl */
+  .xxl-stack-row { flex-direction: row; flex-wrap: wrap; }
+}
+
+/* Gap utilities – can override default gap */
+.gap-0 { gap: 0; }
+.gap-1 { gap: 0.25rem; }   /* 4px */
+.gap-2 { gap: 0.5rem; }    /* 8px */
+.gap-3 { gap: 0.75rem; }   /* 12px */
+.gap-4 { gap: 1rem; }      /* 16px */
+.gap-6 { gap: 1.5rem; }    /* 24px */
+.gap-8 { gap: 2rem; }      /* 32px */
+
+/* Optional responsive gaps (if needed) */
+/* Example: .sm-gap-2 { gap: 0.5rem; } etc. can be added later */

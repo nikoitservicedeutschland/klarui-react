@@ -1,7 +1,11 @@
 /* Reset / Normalize – KlarUI React */
+
+/* ------------------------------------- */
+/* Box sizing & spacing */
+/* ------------------------------------- */
 *,
-::after,
-::before,
+*::before,
+*::after,
 ::backdrop,
 ::file-selector-button {
   box-sizing: border-box;
@@ -10,14 +14,21 @@
   border: 0 solid;
 }
 
+/* ------------------------------------- */
+/* Root & html defaults */
+/* ------------------------------------- */
 html,
 :host {
   line-height: 1.5;
   -webkit-text-size-adjust: 100%;
   tab-size: 4;
   -webkit-tap-highlight-color: transparent;
+  font-family: system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji';
 }
 
+/* ------------------------------------- */
+/* Text & typographic elements */
+/* ------------------------------------- */
 hr {
   height: 0;
   color: inherit;
@@ -28,20 +39,118 @@ abbr[title] {
   text-decoration: underline dotted;
 }
 
-ol, ul, menu {
+b,
+strong {
+  font-weight: bolder;
+}
+
+code,
+kbd,
+samp,
+pre {
+  font-family: ui-monospace, SFMono-Regular, Consolas, 'Liberation Mono', Menlo, monospace;
+  font-size: 1em;
+}
+
+/* ------------------------------------- */
+/* Lists */
+/* ------------------------------------- */
+ol,
+ul,
+menu {
   list-style: none;
 }
 
+/* ------------------------------------- */
+/* Hidden elements */
+/* ------------------------------------- */
 [hidden]:where(:not([hidden='until-found'])) {
   display: none !important;
 }
 
-img, svg, video, canvas, audio, iframe, embed, object {
+/* ------------------------------------- */
+/* Media elements */
+/* ------------------------------------- */
+img,
+svg,
+video,
+canvas,
+audio,
+iframe,
+embed,
+object {
   display: block;
   vertical-align: middle;
 }
 
-img, video {
+img,
+video {
   max-width: 100%;
   height: auto;
+}
+
+/* ------------------------------------- */
+/* Tables */
+/* ------------------------------------- */
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+/* ------------------------------------- */
+/* Links */
+/* ------------------------------------- */
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+/* ------------------------------------- */
+/* Form elements */
+/* ------------------------------------- */
+input,
+button,
+textarea,
+select {
+  font: inherit;
+  color: inherit;
+  background: transparent;
+  border: none;
+  outline: none;
+  padding: 0;
+  margin: 0;
+  line-height: inherit;
+}
+
+button {
+  cursor: pointer;
+}
+
+fieldset {
+  border: 0;
+  margin: 0;
+  padding: 0;
+}
+
+legend {
+  padding: 0;
+}
+
+/* ------------------------------------- */
+/* Other helpers */
+/* ------------------------------------- */
+progress {
+  vertical-align: baseline;
+}
+
+textarea {
+  resize: vertical;
+}
+
+details {
+  display: block;
+}
+
+summary {
+  display: list-item;
 }

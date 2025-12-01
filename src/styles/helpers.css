@@ -1,6 +1,13 @@
 /* Helper Classes – KlarUI React */
-.hover\:opacity-75:hover { opacity: 0.75 !important; }
-.focus\:outline-none:focus { outline: none !important; }
-.transition { transition: all 0.2s ease-in-out !important; }
-.opacity-50 { opacity: 0.5 !important; }
-       
+
+/* Hover Effects */
+.hover\:opacity-75:hover { opacity: 0.75; }
+
+/* Focus Effects */
+.focus\:outline-none:focus { outline: none; }
+
+/* Transitions */
+.transition { transition: all 0.2s ease-in-out; }
+
+/* Opacity */
+.opacity-50 { opacity: 0.5; }

@@ -1,0 +1,65 @@
+/* Base Section – Mobile First */
+.section {
+  width: 100%;
+  padding-top: 3rem;    /* 48px */
+  padding-bottom: 3rem; /* 48px */
+  box-sizing: border-box;
+  position: relative;
+}
+
+/* sm */
+@media (min-width: 640px) {
+  .section {
+    padding-top: 4rem;
+    padding-bottom: 4rem;
+  }
+}
+
+/* md */
+@media (min-width: 768px) {
+  .section {
+    padding-top: 5rem;
+    padding-bottom: 5rem;
+  }
+}
+
+/* lg */
+@media (min-width: 1024px) {
+  .section {
+    padding-top: 6rem;
+    padding-bottom: 6rem;
+  }
+}
+
+/* Variants – visual only, no internal styles */
+
+/* Default variant */
+.default {}
+
+/* Light variant */
+.light {
+  background-color: #f9f9f9;
+}
+
+/* Dark variant */
+.dark {
+  background-color: #111;
+  color: #fff;
+}
+
+/* Surface variant (theme background) */
+.surface {
+  background-color: var(--surface);
+}
+
+/* Gradient variant */
+.gradient {
+  background: linear-gradient(135deg, var(--primary), var(--secondary));
+}
+
+/* Background image variant */
+.bgImage {
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}

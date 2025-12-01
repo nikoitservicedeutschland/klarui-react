@@ -1,19 +1,35 @@
-/* Layout – KlarUI React */
+/* Layout – KlarUI React (Complete & Clean) */
+
+/* ------------------------------------- */
+/* Tables */
+/* ------------------------------------- */
 table {
+  border-collapse: collapse;
+  border-spacing: 0;
   text-indent: 0;
   border-color: inherit;
-  border-collapse: collapse;
 }
 
+/* ------------------------------------- */
+/* Summary element */
 summary {
   display: list-item;
 }
 
+/* ------------------------------------- */
+/* Progress element */
 progress {
   vertical-align: baseline;
 }
 
-button, input, select, optgroup, textarea, ::file-selector-button {
+/* ------------------------------------- */
+/* Form Controls: button, input, select, textarea, file selector */
+button,
+input,
+select,
+optgroup,
+textarea,
+::file-selector-button {
   font: inherit;
   font-feature-settings: inherit;
   font-variation-settings: inherit;
@@ -22,8 +38,12 @@ button, input, select, optgroup, textarea, ::file-selector-button {
   border-radius: 0;
   background-color: transparent;
   opacity: 1;
+  margin: 0;
+  padding: 0;
+  border: 0 solid;
 }
 
+/* Multiple selects */
 select:where([multiple],[size]) optgroup {
   font-weight: bolder;
 }
@@ -32,14 +52,17 @@ select:where([multiple],[size]) optgroup option {
   padding-inline-start: 20px;
 }
 
+/* File selector button */
 ::file-selector-button {
   margin-inline-end: 4px;
 }
 
+/* Textarea */
 textarea {
   resize: vertical;
 }
 
+/* Webkit-specific adjustments */
 ::-webkit-search-decoration {
   -webkit-appearance: none;
 }
@@ -78,6 +101,9 @@ textarea {
   height: auto;
 }
 
-button, input:where([type='button'],[type='reset'],[type='submit']), ::file-selector-button {
+/* Ensure buttons behave consistently */
+button,
+input:where([type='button'], [type='reset'], [type='submit']),
+::file-selector-button {
   appearance: button;
 }

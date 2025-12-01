@@ -2,15 +2,20 @@ import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
 import { resolve } from 'path';
 import copy from 'rollup-plugin-copy';
+import cssInjectedByJsPlugin from 'vite-plugin-css-injected-by-js';
+
+
 
 export default defineConfig({
   plugins: [
     react(),
+     cssInjectedByJsPlugin(),
     copy({
       targets: [
         { src: 'src/styles.css', dest: 'dist/' },
         { src: 'src/animations.css', dest: 'dist/' },
-        { src: ['src/styles/*'], dest: 'dist/styles' }
+        { src: ['src/styles/*'], dest: 'dist/styles' },
+        // { src: ['src/components/**/**/*.module.css'], dest: 'dist/components' },
       ],
       hook: 'writeBundle'
     })
@@ -31,7 +36,7 @@ export default defineConfig({
         }
       }
     },
-    cssCodeSplit: true,
+    cssCodeSplit: false,
     sourcemap: true
   }
 });

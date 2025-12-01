@@ -1,0 +1,60 @@
+/* Wrapper.module.css */
+
+/* Base Wrapper – Mobile First */
+.wrapper {
+  width: 100%;
+  padding-left: 1rem;  /* 16px */
+  padding-right: 1rem; /* 16px */
+  box-sizing: border-box;
+}
+
+/* sm – min-width 640px */
+@media (min-width: 640px) {
+  .wrapper {
+    padding-left: 1.5rem;  /* 24px */
+    padding-right: 1.5rem; /* 24px */
+  }
+}
+
+/* md – min-width 768px */
+@media (min-width: 768px) {
+  .wrapper {
+    padding-left: 2rem;  /* 32px */
+    padding-right: 2rem; /* 32px */
+  }
+}
+
+/* lg – min-width 1024px */
+@media (min-width: 1024px) {
+  .wrapper {
+    padding-left: 3rem;  /* 48px */
+    padding-right: 3rem; /* 48px */
+  }
+}
+
+/* xl – min-width 1280px */
+@media (min-width: 1280px) {
+  .wrapper {
+    padding-left: 4rem;  /* 64px */
+    padding-right: 4rem; /* 64px */
+  }
+}
+
+/* 2xl – min-width 1536px */
+@media (min-width: 1536px) {
+  .wrapper {
+    padding-left: 5rem;  /* 80px */
+    padding-right: 5rem; /* 80px */
+  }
+}
+
+/* Variants */
+.default {}
+.narrow {
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
+}
+.wide {
+  padding-left: 6rem;
+  padding-right: 6rem;
+}

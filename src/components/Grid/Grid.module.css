@@ -1,0 +1,69 @@
+/* Base Grid – Mobile First */
+.grid {
+  display: grid;
+  grid-template-columns: 1fr; /* default 1 column for mobile */
+  gap: 1rem; /* default gap */
+  box-sizing: border-box;
+  width: 100%;
+}
+
+/* Responsive columns – Mobile First */
+
+/* sm – min-width 640px */
+@media (min-width: 640px) {
+  .sm-grid-cols-1 { grid-template-columns: repeat(1, 1fr); }
+  .sm-grid-cols-2 { grid-template-columns: repeat(2, 1fr); }
+  .sm-grid-cols-3 { grid-template-columns: repeat(3, 1fr); }
+  .sm-grid-cols-4 { grid-template-columns: repeat(4, 1fr); }
+  .sm-grid-cols-6 { grid-template-columns: repeat(6, 1fr); }
+  .sm-grid-cols-12 { grid-template-columns: repeat(12, 1fr); }
+}
+
+/* md – min-width 768px */
+@media (min-width: 768px) {
+  .md-grid-cols-1 { grid-template-columns: repeat(1, 1fr); }
+  .md-grid-cols-2 { grid-template-columns: repeat(2, 1fr); }
+  .md-grid-cols-3 { grid-template-columns: repeat(3, 1fr); }
+  .md-grid-cols-4 { grid-template-columns: repeat(4, 1fr); }
+  .md-grid-cols-6 { grid-template-columns: repeat(6, 1fr); }
+  .md-grid-cols-12 { grid-template-columns: repeat(12, 1fr); }
+}
+
+/* lg – min-width 1024px */
+@media (min-width: 1024px) {
+  .lg-grid-cols-1 { grid-template-columns: repeat(1, 1fr); }
+  .lg-grid-cols-2 { grid-template-columns: repeat(2, 1fr); }
+  .lg-grid-cols-3 { grid-template-columns: repeat(3, 1fr); }
+  .lg-grid-cols-4 { grid-template-columns: repeat(4, 1fr); }
+  .lg-grid-cols-6 { grid-template-columns: repeat(6, 1fr); }
+  .lg-grid-cols-12 { grid-template-columns: repeat(12, 1fr); }
+}
+
+/* xl – min-width 1280px */
+@media (min-width: 1280px) {
+  .xl-grid-cols-1 { grid-template-columns: repeat(1, 1fr); }
+  .xl-grid-cols-2 { grid-template-columns: repeat(2, 1fr); }
+  .xl-grid-cols-3 { grid-template-columns: repeat(3, 1fr); }
+  .xl-grid-cols-4 { grid-template-columns: repeat(4, 1fr); }
+  .xl-grid-cols-6 { grid-template-columns: repeat(6, 1fr); }
+  .xl-grid-cols-12 { grid-template-columns: repeat(12, 1fr); }
+}
+
+/* xxl – min-width 1536px */
+@media (min-width: 1536px) {
+  .xxl-grid-cols-1 { grid-template-columns: repeat(1, 1fr); }
+  .xxl-grid-cols-2 { grid-template-columns: repeat(2, 1fr); }
+  .xxl-grid-cols-3 { grid-template-columns: repeat(3, 1fr); }
+  .xxl-grid-cols-4 { grid-template-columns: repeat(4, 1fr); }
+  .xxl-grid-cols-6 { grid-template-columns: repeat(6, 1fr); }
+  .xxl-grid-cols-12 { grid-template-columns: repeat(12, 1fr); }
+}
+
+/* Gap utilities */
+.gap-0 { gap: 0; }
+.gap-1 { gap: 0.25rem; }   /* 4px */
+.gap-2 { gap: 0.5rem; }    /* 8px */
+.gap-3 { gap: 0.75rem; }   /* 12px */
+.gap-4 { gap: 1rem; }      /* 16px */
+.gap-6 { gap: 1.5rem; }    /* 24px */
+.gap-8 { gap: 2rem; }      /* 32px */

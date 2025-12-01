@@ -1,10 +1,138 @@
 /* Utilities – KlarUI React */
-/* کلاس های کمکی مثل margin, padding, display, shadow */
-.hidden { display: none !important; }
-.block { display: block !important; }
-.inline-block { display: inline-block !important; }
-.flex { display: flex !important; }
-.items-center { align-items: center !important; }
-.justify-center { justify-content: center !important; }
-.rounded { border-radius: 0.25rem !important; }
-.shadow { box-shadow: 0 1px 3px rgba(0,0,0,0.1), 0 1px 2px rgba(0,0,0,0.06) !important; }
+
+/* ---------------------------
+   Display
+---------------------------- */
+.hidden { display: none; }
+.block { display: block; }
+.inline-block { display: inline-block; }
+.flex { display: flex; }
+.inline-flex { display: inline-flex; }
+.items-start { align-items: flex-start; }
+.items-center { align-items: center; }
+.items-end { align-items: flex-end; }
+.justify-start { justify-content: flex-start; }
+.justify-center { justify-content: center; }
+.justify-end { justify-content: flex-end; }
+.justify-between { justify-content: space-between; }
+.justify-around { justify-content: space-around; }
+
+/* ---------------------------
+   Padding (mobile-first)
+---------------------------- */
+.p-0 { padding: 0; }
+.p-5 { padding: 5px; }
+.p-10 { padding: 10px; }
+.p-15 { padding: 15px; }
+.p-20 { padding: 20px; }
+.px-5 { padding-left: 5px; padding-right: 5px; }
+.px-10 { padding-left: 10px; padding-right: 10px; }
+.py-5 { padding-top: 5px; padding-bottom: 5px; }
+.py-10 { padding-top: 10px; padding-bottom: 10px; }
+
+/* ---------------------------
+   Margin (mobile-first)
+---------------------------- */
+.m-0 { margin: 0; }
+.m-5 { margin: 5px; }
+.m-10 { margin: 10px; }
+.m-15 { margin: 15px; }
+.m-20 { margin: 20px; }
+.mx-5 { margin-left: 5px; margin-right: 5px; }
+.mx-10 { margin-left: 10px; margin-right: 10px; }
+.my-5 { margin-top: 5px; margin-bottom: 5px; }
+.my-10 { margin-top: 10px; margin-bottom: 10px; }
+
+/* ---------------------------
+   Width / Height
+---------------------------- */
+.w-full { width: 100%; }
+.h-full { height: 100%; }
+.max-w-full { max-width: 100%; }
+.min-w-full { min-width: 100%; }
+
+/* ---------------------------
+   Border Radius / Shadow
+---------------------------- */
+.rounded { border-radius: 0.25rem; }
+.rounded-sm { border-radius: 0.125rem; }
+.rounded-md { border-radius: 0.5rem; }
+.rounded-lg { border-radius: 1rem; }
+.shadow { box-shadow: 0 1px 3px var(--shadow-color-dark), 0 1px 2px var(--shadow-color-light); }
+.shadow-md { box-shadow: 0 4px 6px var(--shadow-color-dark), 0 2px 4px var(--shadow-color-light); }
+.shadow-lg { box-shadow: 0 10px 15px var(--shadow-color-dark), 0 4px 6px var(--shadow-color-light); }
+
+
+/* ---------------------------
+   Text / Typography
+---------------------------- */
+.text-left { text-align: left; }
+.text-center { text-align: center; }
+.text-right { text-align: right; }
+.font-bold { font-weight: 700; }
+.font-normal { font-weight: 400; }
+.uppercase { text-transform: uppercase; }
+.lowercase { text-transform: lowercase; }
+
+/* ---------------------------
+   Background / Colors (CSS Variables)
+---------------------------- */
+.bg-transparent { background-color: transparent; }
+.bg-white { background-color: var(--color-background); }
+.bg-black { background-color: var(--color-text-inverse); }
+.text-primary { color: var(--color-primary); }
+.text-secondary { color: var(--color-secondary); }
+.text-accent { color: var(--color-accent); }
+.text-success { color: var(--color-success); }
+.text-error { color: var(--color-error); }
+.text-warning { color: var(--color-warning); }
+.text-info { color: var(--color-info); }
+
+/* ---------------------------
+   Responsive Utilities
+---------------------------- */
+@media (min-width: 640px) { /* sm */
+  .sm\:p-5 { padding: 5px; }
+  .sm\:p-10 { padding: 10px; }
+  .sm\:px-5 { padding-left: 5px; padding-right: 5px; }
+  .sm\:px-10 { padding-left: 10px; padding-right: 10px; }
+  .sm\:m-5 { margin: 5px; }
+  .sm\:m-10 { margin: 10px; }
+}
+
+@media (min-width: 768px) { /* md */
+  .md\:p-5 { padding: 5px; }
+  .md\:p-10 { padding: 10px; }
+  .md\:px-5 { padding-left: 5px; padding-right: 5px; }
+  .md\:px-10 { padding-left: 10px; padding-right: 10px; }
+  .md\:m-5 { margin: 5px; }
+  .md\:m-10 { margin: 10px; }
+}
+
+@media (min-width: 1024px) { /* lg */
+  .lg\:p-5 { padding: 5px; }
+  .lg\:p-10 { padding: 10px; }
+  .lg\:px-5 { padding-left: 5px; padding-right: 5px; }
+  .lg\:px-10 { padding-left: 10px; padding-right: 10px; }
+  .lg\:m-5 { margin: 5px; }
+  .lg\:m-10 { margin: 10px; }
+}
+
+@media (min-width: 1280px) { /* xl */
+  .xl\:p-5 { padding: 5px; }
+  .xl\:p-10 { padding: 10px; }
+  .xl\:px-5 { padding-left: 5px; padding-right: 5px; }
+  .xl\:px-10 { padding-left: 10px; padding-right: 10px; }
+  .xl\:m-5 { margin: 5px; }
+  .xl\:m-10 { margin: 10px; }
+}
+
+@media (min-width: 1536px) { /* 2xl */
+  ._2xl\:p-5 { padding: 5px; }
+  ._2xl\:p-10 { padding: 10px; }
+  ._2xl\:px-5 { padding-left: 5px; padding-right: 5px; }
+  ._2xl\:px-10 { padding-left: 10px; padding-right: 10px; }
+  ._2xl\:m-5 { margin: 5px; }
+  ._2xl\:m-10 { margin: 10px; }
+}
+/* End of Utilities – KlarUI React */
