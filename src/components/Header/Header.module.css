@@ -1,6 +1,5 @@
 /* KlarUI React - Header Component Styles */
 
-/* === BASE HEADER === */
 .header {
   position: relative;
   width: 100%;
@@ -19,7 +18,6 @@
   position: relative;
 }
 
-/* === LOGO === */
 .logo {
   display: grid;
   place-items: flex-start;
@@ -37,7 +35,6 @@
   transform: scale(1.02);
 }
 
-/* === SEARCH === */
 .searchContainer {
   position: relative;
   flex-shrink: 0;
@@ -108,7 +105,6 @@
   border-bottom: 1px solid var(--header-border, #e5e7eb);
 }
 
-/* === BURGER BUTTON === */
 .burger {
   background: none;
   border: none;
@@ -135,7 +131,6 @@
   outline-offset: 2px;
 }
 
-/* === MOBILE MENU === */
 .menu {
   position: absolute;
   top: 100%;
@@ -169,7 +164,6 @@
   display: block;
 }
 
-/* === MENU LIST === */
 .menuList {
   list-style: none;
   margin: 0;
@@ -178,7 +172,6 @@
   grid-template-columns: 1fr;
 }
 
-/* === MENU ITEM === */
 .item {
   position: relative;
   border-bottom: 1px solid var(--color-divider, #f3f4f6);
@@ -189,7 +182,6 @@
   border-bottom: none;
 }
 
-/* === MENU LINK === */
 .link {
   display: grid;
   grid-template-columns: auto 1fr auto auto;
@@ -225,7 +217,6 @@
   cursor: not-allowed;
 }
 
-/* === MENU COMPONENTS === */
 .icon {
   display: grid;
   place-items: center;
@@ -253,7 +244,6 @@
   to { transform: rotate(360deg); }
 }
 
-/* === MENU STATES === */
 .item.active .link {
   color: var(--header-text-active, #3b82f6);
   font-weight: 600;
@@ -270,7 +260,6 @@
   pointer-events: none;
 }
 
-/* === VARIANTS === */
 .item.variant-primary .link {
   color: var(--color-primary, #3b82f6);
   font-weight: 600;
@@ -284,7 +273,6 @@
   color: var(--color-success, #10b981);
 }
 
-/* === BADGES === */
 .badge-default {
   background: var(--color-border, #d1d5db);
   color: var(--color-text, #1f2937);
@@ -310,7 +298,6 @@
   color: white;
 }
 
-/* === SUBMENU === */
 .item.hasSubmenu > .link::after {
   content: "▾";
   justify-self: end;
@@ -338,7 +325,7 @@
 }
 
 .item.submenuOpen > .submenu {
-  max-height: 2000px; /* ✅ خیلی بزرگ */
+  max-height: 1000px;
 }
 
 .submenu .item {
@@ -354,51 +341,6 @@
   font-size: var(--size-text-sm, 14px);
 }
 
-/* === SUBMENU ARROWS FOR LEVEL 2+ === */
-.submenu .item.hasSubmenu > .link::after {
-  content: "▸";
-  justify-self: end;
-  margin-left: auto;
-  transition: transform var(--transition-normal, 0.2s);
-  order: 4;
-  font-size: var(--size-text-sm, 14px);
-}
-
-.submenu .item.submenuOpen > .link::after {
-  content: "▾";
-  transform: rotate(0deg);
-}
-
-/* === NESTED SUBMENUS (LEVEL 3+) === */
-.submenu .submenu {
-  position: static;
-  left: auto;
-  top: auto;
-  margin: 0;
-  border: none;
-  box-shadow: none;
-  background: var(--header-submenu-background, #f9fafb);
-  max-height: 0;
-  overflow: hidden;
-  transition: max-height var(--transition-slow, 0.3s) ease-out;
-  border-top: 1px solid var(--color-divider, #f3f4f6);
-}
-
-.submenu .item.submenuOpen > .submenu {
-  max-height: 2000px; /* ✅ خیلی بزرگ */
-}
-
-.submenu .submenu .link {
-  padding-left: calc(var(--size-p-md, 16px) * 4); /* ✅ بیشتر indent */
-  font-size: var(--size-text-xs, 12px);
-  background-color: rgba(0, 0, 0, 0.02);
-}
-
-.submenu .submenu .link:hover {
-  background-color: var(--header-menu-hover, #f3f4f6);
-}
-
-/* === NO RESULTS === */
 .noResults {
   padding: var(--size-p-xl, 32px) var(--size-p-md, 16px);
   text-align: center;
@@ -414,17 +356,12 @@
   font-size: var(--size-text-sm, 14px);
 }
 
-/* === ACCESSIBILITY === */
 @media (prefers-reduced-motion: reduce) {
   * {
     transition: none !important;
     animation: none !important;
   }
 }
-
-/* ======================================== */
-/* ===           DESKTOP STYLES         === */
-/* ======================================== */
 
 @media (min-width: 1024px) {
   .container {
@@ -501,7 +438,6 @@
     background-color: var(--header-menu-hover, #f3f4f6);
   }
 
-  /* ✅ فقط کلیک - هاور غیرفعال */
   .menuList > .item.hasSubmenu > .link::after {
     display: none;
   }
@@ -525,7 +461,6 @@
     margin-top: var(--size-gap-sm, 12px);
   }
 
-  /* ✅ فقط کلیک - hover حذف شد */
   .item.submenuOpen > .submenu {
     max-height: 400px;
     opacity: 1;
@@ -556,64 +491,17 @@
     font-size: var(--size-text-sm, 14px);
     border-radius: 0;
     text-align: left;
-    padding-left: var(--size-p-md, 16px); /* ✅ reset indent */
+    padding-left: var(--size-p-md, 16px);
   }
 
   .submenu .link:hover {
     background-color: var(--header-menu-hover, #f3f4f6);
   }
-
-  .submenu .item.hasSubmenu > .link::after {
-    display: block ! important;
-    content: "▸";
-    font-size: var(--size-text-xs, 12px);
-    margin-left: auto;
-    transition: transform var(--transition-normal, 0.2s);
-  }
-
-  .submenu .item.submenuOpen > .link::after {
-    content: "▾";
-    transform: rotate(0deg);
-  }
-
-  /* ✅ Desktop nested submenu */
-  .submenu .submenu {
-    position: absolute;
-    left: 100%;
-    top: 0;
-    margin-top: 0;
-    margin-left: var(--size-gap-xs, 8px);
-    border: 1px solid var(--header-border, #e5e7eb);
-    box-shadow: var(--shadow-xl, 0 20px 25px -5px rgba(0, 0, 0, 0.1));
-    background: var(--header-menu-background, #ffffff);
-    z-index: calc(var(--z-dropdown, 1001) + 10);
-    border-top: none;
-  }
-  
-  .submenu .submenu .link {
-    padding: var(--size-p-md, 16px);
-    background: transparent;
-    padding-left: var(--size-p-md, 16px); /* ✅ reset indent */
-  }
-
-  /* ✅ فقط کلیک - hover حذف شد */
-  .submenu .item.submenuOpen > .submenu {
-    max-height: 400px;
-    opacity: 1;
-    transform: translateY(0);
-  }
 }
 
-/* ======================================== */
-/* ===        UTILITY CLASSES           === */
-/* ======================================== */
-
-/* === HEIGHTS === */
 .h-xs { min-height: var(--size-h-xs, 24px); }
 .h-sm { min-height: var(--size-h-sm, 32px); }
 .h-md { min-height: var(--size-h-md, 40px); }
 .h-lg { min-height: var(--size-h-lg, 48px); }
 .h-xl { min-height: var(--size-h-xl, 64px); }
 .h-xxl { min-height: var(--size-h-xxl, 80px); }
-
-/* باقی utility classes... همینطور نگه دار */

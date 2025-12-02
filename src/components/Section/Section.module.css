@@ -1,8 +1,8 @@
 /* Base Section – Mobile First */
 .section {
   width: 100%;
-  padding-top: 3rem;    /* 48px */
-  padding-bottom: 3rem; /* 48px */
+  padding-top: 3rem;
+  padding-bottom: 3rem;
   box-sizing: border-box;
   position: relative;
 }
@@ -31,34 +31,34 @@
   }
 }
 
-/* Variants – visual only, no internal styles */
-
-/* Default variant */
+/* Variants */
 .default {}
 
-/* Light variant */
 .light {
-  background-color: #f9f9f9;
+  background-color: var(--color-surface);
 }
 
-/* Dark variant */
 .dark {
-  background-color: #111;
-  color: #fff;
+  background-color: var(--color-background);
+  color: var(--color-text-inverse);
 }
 
-/* Surface variant (theme background) */
 .surface {
-  background-color: var(--surface);
+  background-color: var(--color-surface);
 }
 
-/* Gradient variant */
 .gradient {
-  background: linear-gradient(135deg, var(--primary), var(--secondary));
+  background: linear-gradient(135deg, var(--color-primary), var(--color-secondary));
+  color: var(--color-text-inverse);
 }
 
-/* Background image variant */
 .bgImage {
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.bg-image {
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;

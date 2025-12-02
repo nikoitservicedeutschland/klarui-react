@@ -2,13 +2,11 @@ import React, { useState, useEffect, useRef, useCallback } from "react";
 import * as LucideIcons from "lucide-react";
 import styles from "./Header.module.css";
 
-// Helper to get icon from lucide-react
 function getIcon(name, size = 20) {
   const Icon = LucideIcons[name];
   return Icon ? <Icon size={size} /> : null;
 }
 
-// Search Component (Optional)
 const SearchBox = ({ onSearch, placeholder = "Search.. .", className = "" }) => {
   const [searchTerm, setSearchTerm] = useState("");
 
@@ -31,7 +29,7 @@ const SearchBox = ({ onSearch, placeholder = "Search.. .", className = "" }) => 
         {searchTerm && (
           <button
             onClick={() => handleSearch("")}
-            className={styles. searchClear}
+            className={styles.searchClear}
             aria-label="Clear search"
           >
             <LucideIcons.X size={16} />
@@ -42,7 +40,6 @@ const SearchBox = ({ onSearch, placeholder = "Search.. .", className = "" }) => 
   );
 };
 
-// Main Header Component
 const Header = ({
   logo = null,
   menuItems = [],
@@ -55,34 +52,28 @@ const Header = ({
   onSearch = null,
   theme = "auto",
   className = "",
-  ... props
+  ...props
 }) => {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [searchTerm, setSearchTerm] = useState("");
   const [focusedIndex, setFocusedIndex] = useState(-1);
   const [openSubmenus, setOpenSubmenus] = useState([]);
   const headerRef = useRef(null);
+  const menuRef = useRef(null);
 
   const processMenuItems = (items) => {
     if (!activeItem) return items;
     
     return items.map(item => {
       const isItemActive = activeItem === item.label;
-      const hasActiveSubmenu = item.submenus?. some(sub => 
-        activeItem === sub.label || 
-        sub.submenus?.some(subsub => activeItem === subsub.label)
-      );
+      const hasActiveSubmenu = item.submenus?. some(sub => activeItem === sub.label);
       
       return {
         ...item,
         active: isItemActive || hasActiveSubmenu,
         submenus: item.submenus?. map(sub => ({
-          ... sub,
-          active: activeItem === sub.label || sub. submenus?.some(subsub => activeItem === subsub.label),
-          submenus: sub.submenus?.map(subsub => ({
-            ...subsub,
-            active: activeItem === subsub. label
-          }))
+          ...sub,
+          active: activeItem === sub.label
         }))
       };
     });
@@ -92,12 +83,9 @@ const Header = ({
   
   const filteredMenuItems = searchTerm
     ? processedMenuItems.filter((item) =>
-        item.label.toLowerCase(). includes(searchTerm.toLowerCase()) ||
+        item.label.toLowerCase().includes(searchTerm.toLowerCase()) ||
         (item.submenus?.some(sub => 
-          sub.label.toLowerCase().includes(searchTerm.toLowerCase()) ||
-          sub. submenus?.some(subsub => 
-            subsub.label.toLowerCase().includes(searchTerm.toLowerCase())
-          )
+          sub.label.toLowerCase(). includes(searchTerm.toLowerCase())
         ))
       )
     : processedMenuItems;
@@ -118,7 +106,7 @@ const Header = ({
       );
     }
     
-    if (e.key === "ArrowUp") {
+    if (e. key === "ArrowUp") {
       e.preventDefault();
       setFocusedIndex(prev => 
         prev > 0 ? prev - 1 : filteredMenuItems.length - 1
@@ -131,27 +119,15 @@ const Header = ({
     onSearch?.(value, filteredMenuItems);
   };
 
-const handleSubmenuToggle = (menuPath) => {
-  if (menuPath === 'CLOSE_ALL') {
-    setOpenSubmenus([]);
-    return;
-  }
-
-  setOpenSubmenus(prev => {
-    const isOpen = prev.includes(menuPath);
-    const level = menuPath.split('-'). length;
-    
-    if (isOpen) {
-      return prev.filter(path => !path. startsWith(menuPath));
-    }
-    
-    if (level === 1) {
-      return prev.filter(path => path. includes('-')).concat([menuPath]);
-    } else {
-      return [...prev, menuPath];
-    }
-  });
-};
+  const handleSubmenuToggle = (menuLabel) => {
+    setOpenSubmenus(prev => {
+      if (prev.includes(menuLabel)) {
+        return prev.filter(label => label !== menuLabel);
+      } else {
+        return [menuLabel];
+      }
+    });
+  };
 
   const trackMenuClick = (item, level = 1) => {
     if (enableAnalytics && typeof window !== 'undefined' && window.gtag) {
@@ -163,24 +139,28 @@ const handleSubmenuToggle = (menuPath) => {
     }
   };
 
-  useEffect(() => {
-    const handleClickOutside = (event) => {
-      if (headerRef. current && !headerRef.current. contains(event.target)) {
-        setMobileOpen(false);
-        setOpenSubmenus([]);
-      }
-    };
-
-    if (mobileOpen) {
-      document. addEventListener("mousedown", handleClickOutside);
-      document.addEventListener("keydown", handleKeyDown);
+useEffect(() => {
+  const handleClickOutside = (event) => {
+    const burgerButton = headerRef.current?.querySelector('.burger');
+    
+    if (burgerButton?.contains(event.target)) {
+      return;
     }
+    
+    if (menuRef.current && !menuRef.current.contains(event.target)) {
+      setMobileOpen(false);
+      setOpenSubmenus([]);
+    }
+  };
 
-    return () => {
-      document.removeEventListener("mousedown", handleClickOutside);
-      document.removeEventListener("keydown", handleKeyDown);
-    };
-  }, [mobileOpen, handleKeyDown]);
+  document.addEventListener("mousedown", handleClickOutside);
+  document.addEventListener("keydown", handleKeyDown);
+
+  return () => {
+    document.removeEventListener("mousedown", handleClickOutside);
+    document.removeEventListener("keydown", handleKeyDown);
+  };
+}, [handleKeyDown]);
 
   const headerClasses = [
     styles.header,
@@ -225,6 +205,7 @@ const handleSubmenuToggle = (menuPath) => {
         </button>
 
         <nav 
+          ref={menuRef}
           className={`${styles.menu} ${mobileOpen ? styles. menuOpen : ""}`}
           role="navigation"
           aria-label="Main navigation"
@@ -250,10 +231,8 @@ const handleSubmenuToggle = (menuPath) => {
                 onMenuClick={onMenuClick}
                 trackClick={trackMenuClick}
                 isFocused={focusedIndex === idx}
-                level={1}
                 openSubmenus={openSubmenus}
                 onSubmenuToggle={handleSubmenuToggle}
-                parentPath=""
               />
             ))}
           </ul>
@@ -270,57 +249,53 @@ const handleSubmenuToggle = (menuPath) => {
   );
 };
 
-// ✅ MenuItem کامپوننت اصلاح شده
 const MenuItem = ({ 
   item, 
   onClose, 
   onMenuClick,
   trackClick,
   isFocused = false,
-  level = 1,
   openSubmenus = [],
-  onSubmenuToggle,
-  parentPath = ""
+  onSubmenuToggle
 }) => {
   const hasSubmenus = Array.isArray(item.submenus) && item.submenus.length > 0;
   const isActive = !!item.active;
-  const itemPath = parentPath ? `${parentPath}-${item.label}` : item.label;
-  const submenuOpen = openSubmenus.includes(itemPath);
+  const submenuOpen = openSubmenus.includes(item.label);
   const [isLoading, setIsLoading] = useState(false);
   const menuItemRef = useRef(null);
 
   useEffect(() => {
-    if (isFocused && menuItemRef. current) {
+    if (isFocused && menuItemRef.current) {
       menuItemRef.current.focus();
     }
   }, [isFocused]);
 
- const handleMenuClick = async (e) => {
-  trackClick?.(item, level);
-  
-  if (hasSubmenus) {
-    e.preventDefault();
-    onSubmenuToggle?.(itemPath);
-    return;
-  }
-
-  if (level === 1) {
-    onSubmenuToggle?. ('CLOSE_ALL');
-  }
-
-  if (onMenuClick) {
-    setIsLoading(true);
-    try {
-      await onMenuClick(item, e);
-    } finally {
-      setIsLoading(false);
+  const handleMenuClick = async (e) => {
+    trackClick?.(item);
+    
+    if (hasSubmenus) {
+      e.preventDefault();
+      onSubmenuToggle?.(item.label);
+      return;
     }
-  }
 
-  if (onClose && ! item.keepOpen) {
-    onClose();
-  }
-};
+    if (openSubmenus.length > 0) {
+      onSubmenuToggle?. ('CLOSE_ALL');
+    }
+
+    if (onMenuClick) {
+      setIsLoading(true);
+      try {
+        await onMenuClick(item, e);
+      } finally {
+        setIsLoading(false);
+      }
+    }
+
+    if (onClose && !item.keepOpen) {
+      onClose();
+    }
+  };
 
   const handleKeyDown = (e) => {
     if (e. key === "Enter" || e.key === " ") {
@@ -401,19 +376,57 @@ const MenuItem = ({
       )}
       
       {hasSubmenus && (
-        <ul className={styles.submenu} role="menu">
+        <ul className={styles. submenu} role="menu">
           {item.submenus.map((sub, idx) => (
-            <MenuItem 
-              key={`${sub.label}-${idx}`}
-              item={sub} 
-              onClose={onClose}
-              onMenuClick={onMenuClick}
-              trackClick={trackClick}
-              level={level + 1}
-              openSubmenus={openSubmenus}
-              onSubmenuToggle={onSubmenuToggle} 
-              parentPath={itemPath}
-            />
+            <li key={`${sub.label}-${idx}`} className={styles.item}>
+              {sub.link ?  (
+                <a
+                  href={sub.link}
+                  className={styles.link}
+                  onClick={async (e) => {
+                    if (onMenuClick) {
+                      await onMenuClick(sub, e);
+                    }
+                    if (onClose && !sub.keepOpen) {
+                      onClose();
+                    }
+                  }}
+                >
+                  {sub.icon && (
+                    <span className={styles.icon}>
+                      {getIcon(sub.icon)}
+                    </span>
+                  )}
+                  <span className={styles.label}>{sub.label}</span>
+                  {sub.badge && (
+                    <span className={`${styles.badge} ${styles[`badge-${sub.badge.type || 'default'}`]}`}>
+                      {sub.badge. text}
+                    </span>
+                  )}
+                </a>
+              ) : (
+                <button
+                  className={styles.link}
+                  onClick={async (e) => {
+                    if (onMenuClick) {
+                      await onMenuClick(sub, e);
+                    }
+                  }}
+                >
+                  {sub.icon && (
+                    <span className={styles.icon}>
+                      {getIcon(sub.icon)}
+                    </span>
+                  )}
+                  <span className={styles.label}>{sub.label}</span>
+                  {sub.badge && (
+                    <span className={`${styles.badge} ${styles[`badge-${sub.badge.type || 'default'}`]}`}>
+                      {sub.badge.text}
+                    </span>
+                  )}
+                </button>
+              )}
+            </li>
           ))}
         </ul>
       )}

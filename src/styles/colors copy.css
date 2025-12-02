@@ -1,0 +1,191 @@
+/* KlarUI React - Color System & CSS Variables */
+
+:root {
+  /* === PRIMARY COLOR PALETTE === */
+  --color-primary: #1d4ed8;
+  --color-primary-50: #eff6ff;
+  --color-primary-100: #dbeafe;
+  --color-primary-200: #bfdbfe;
+  --color-primary-300: #93c5fd;
+  --color-primary-400: #60a5fa;
+  --color-primary-500: #3b82f6;
+  --color-primary-600: #2563eb;
+  --color-primary-700: #1d4ed8;
+  --color-primary-800: #1e40af;
+  --color-primary-900: #1e3a8a;
+
+  /* === SECONDARY & ACCENT === */
+  --color-secondary: #9333ea;
+  --color-accent: #facc15;
+
+  /* === BACKGROUND COLORS === */
+  --color-background: #ffffff;
+  --color-surface: #f9fafb;
+  --color-muted: #f3f4f6;
+
+  /* === TEXT COLORS === */
+  --color-text: #111827;
+  --color-text-muted: #6b7280;
+  --color-text-light: #9ca3af;
+  --color-text-inverse: #ffffff;
+
+  /* === BORDER & DIVIDER === */
+  --color-border: #e5e7eb;
+  --color-border-light: #f3f4f6;
+  --color-divider: #d1d5db;
+
+  /* === STATE COLORS === */
+  --color-success: #16a34a;
+  --color-success-light: #dcfce7;
+  --color-warning: #f59e0b;
+  --color-warning-light: #fef3c7;
+  --color-error: #dc2626;
+  --color-error-light: #fee2e2;
+  --color-info: #0ea5e9;
+  --color-info-light: #e0f2fe;
+
+  /* === SHADOW COLORS === */
+  --shadow-color-light: rgba(0, 0, 0, 0.04);
+  --shadow-color: rgba(0, 0, 0, 0.08);
+  --shadow-color-dark: rgba(0, 0, 0, 0.12);
+  --shadow-color-darker: rgba(0, 0, 0, 0.16);
+
+  /* === HEADER SPECIFIC VARIABLES === */
+  --header-background: var(--color-background);
+  --header-border: var(--color-border);
+  --header-text: var(--color-text);
+  --header-text-hover: var(--color-primary);
+  --header-text-active: var(--color-primary-700);
+  --header-menu-background: var(--color-background);
+  --header-menu-hover: var(--color-surface);
+  --header-submenu-background: var(--color-surface);
+  --header-shadow: var(--shadow-color);
+  --header-shadow-dark: var(--shadow-color-dark);
+
+  /* === SEARCH VARIABLES === */
+  --search-background: var(--color-surface);
+  --search-border: var(--color-border);
+  --search-border-focus: var(--color-primary);
+  --search-text: var(--color-text);
+  --search-placeholder: var(--color-text-muted);
+
+  /* === ANIMATION & TRANSITION === */
+  --transition-fast: 0.15s ease;
+  --transition-normal: 0.2s ease;
+  --transition-slow: 0.3s ease;
+
+  /* === SIZE SCALES === */
+  /* Heights */
+  --size-h-xs: 40px;
+  --size-h-sm: 50px;
+  --size-h-md: 60px;
+  --size-h-lg: 80px;
+  --size-h-xl: 100px;
+  --size-h-xxl: 120px;
+
+  /* Logo Sizes */
+  --size-logo-xs: 24px;
+  --size-logo-sm: 32px;
+  --size-logo-md: 40px;
+  --size-logo-lg: 56px;
+  --size-logo-xl: 72px;
+
+  /* Gaps */
+  --size-gap-xs: 0.25rem;
+  --size-gap-sm: 0.5rem;
+  --size-gap-md: 1rem;
+  --size-gap-lg: 1. 5rem;
+  --size-gap-xl: 2rem;
+  --size-gap-xxl: 3rem;
+
+  /* Padding */
+  --size-p-xs: 0.25rem;
+  --size-p-sm: 0.5rem;
+  --size-p-md: 0.75rem;
+  --size-p-lg: 1rem;
+  --size-p-xl: 1.5rem;
+  --size-p-xxl: 2rem;
+
+  /* Font Sizes */
+  --size-text-xs: 0.75rem;
+  --size-text-sm: 0.875rem;
+  --size-text-md: 1rem;
+  --size-text-lg: 1.125rem;
+  --size-text-xl: 1.25rem;
+
+  /* Shadows */
+  --shadow-none: none;
+  --shadow-sm: 0 1px 2px var(--shadow-color-light);
+  --shadow-md: 0 4px 6px var(--shadow-color);
+  --shadow-lg: 0 10px 15px var(--shadow-color-dark);
+  --shadow-xl: 0 20px 25px var(--shadow-color-darker);
+
+  /* Border Radius */
+  --radius-sm: 4px;
+  --radius-md: 6px;
+  --radius-lg: 8px;
+  --radius-xl: 12px;
+
+  /* Z-Index Scale */
+  --z-dropdown: 1000;
+  --z-sticky: 1020;
+  --z-fixed: 1030;
+  --z-modal: 1040;
+  --z-tooltip: 1050;
+}
+
+/* === DARK THEME === */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --color-background: #0f172a;
+    --color-surface: #1e293b;
+    --color-muted: #334155;
+    
+    --color-text: #f8fafc;
+    --color-text-muted: #cbd5e1;
+    --color-text-light: #94a3b8;
+    
+    --color-border: #334155;
+    --color-border-light: #475569;
+    --color-divider: #475569;
+    
+    /* Header Dark Theme */
+    --header-background: var(--color-background);
+    --header-border: var(--color-border);
+    --header-text: var(--color-text);
+    --header-text-hover: #60a5fa;
+    --header-text-active: #3b82f6;
+    --header-menu-background: var(--color-background);
+    --header-menu-hover: var(--color-surface);
+    --header-submenu-background: var(--color-surface);
+    
+    /* Search Dark Theme */
+    --search-background: var(--color-surface);
+    --search-border: var(--color-border);
+    --search-text: var(--color-text);
+    --search-placeholder: var(--color-text-muted);
+    
+    /* Shadows for Dark */
+    --shadow-color-light: rgba(0, 0, 0, 0.2);
+    --shadow-color: rgba(0, 0, 0, 0.3);
+    --shadow-color-dark: rgba(0, 0, 0, 0.4);
+    --shadow-color-darker: rgba(0, 0, 0, 0.5);
+  }
+}
+
+/* === THEME OVERRIDE CLASSES === */
+.theme-light {
+  --color-background: #ffffff;
+  --color-surface: #f9fafb;
+  --color-text: #111827;
+  --header-background: var(--color-background);
+  --header-text: var(--color-text);
+}
+
+.theme-dark {
+  --color-background: #0f172a;
+  --color-surface: #1e293b;
+  --color-text: #f8fafc;
+  --header-background: var(--color-background);
+  --header-text: var(--color-text);
+}

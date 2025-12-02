@@ -1,13 +1,26 @@
+import React from "react";
 import styles from "./Grid.module.css";
+import { enhanceClasses } from "../../utils/enhanceClasses";
 
-/**
- * Grid Component – Class-based, Mobile-First, Responsive
- * Props only for children or event handling
- */
 const Grid = ({ children, className = "", ...props }) => {
+  const enhanceChildren = (children) => {
+    return React.  Children. map(children, (child) => {
+      if (React.isValidElement(child)) {
+        const childClassName = child.props.className || '';
+        const enhancedClassName = enhanceClasses(childClassName, styles);
+        
+        return React.cloneElement(child, {
+          ...child.props,
+          className: enhancedClassName.trim()
+        });
+      }
+      return child;
+    });
+  };
+
   return (
     <div className={`${styles.grid} ${className}`} {...props}>
-      {children}
+      {enhanceChildren(children)}
     </div>
   );
 };
