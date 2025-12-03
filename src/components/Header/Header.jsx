@@ -7,7 +7,7 @@ function getIcon(name, size = 20) {
   return Icon ? <Icon size={size} /> : null;
 }
 
-const SearchBox = ({ onSearch, placeholder = "Search.. .", className = "" }) => {
+const SearchBox = ({ onSearch, placeholder = "Search...", className = "" }) => {
   const [searchTerm, setSearchTerm] = useState("");
 
   const handleSearch = (value) => {
@@ -41,25 +41,131 @@ const SearchBox = ({ onSearch, placeholder = "Search.. .", className = "" }) => 
 };
 
 const Header = ({
+  // UI Configuration
   logo = null,
   menuItems = [],
-  activeItem = null,
   searchPlaceholder = "Search menu...",
   enableSearch = false,
   enableKeyboardNav = true,
   enableAnalytics = false,
-  onMenuClick = null,
-  onSearch = null,
   theme = "auto",
   className = "",
+  
+  // State Management - Enhanced
+  autoDetectActive = true,         // ✅ Auto-detect active item from URL
+  urlToLabelMapping = null,        // ✅ Custom URL to label mapping
+  initialActiveItem = null,        // ✅ Manual initial active item
+  
+  // Callbacks - External
+  onMenuClick = null,
+  onSearch = null,
+  onActiveChange = null,
+  onError = null,
+  
   ...props
 }) => {
+  const [activeItem, setActiveItem] = useState(null);
   const [mobileOpen, setMobileOpen] = useState(false);
   const [searchTerm, setSearchTerm] = useState("");
   const [focusedIndex, setFocusedIndex] = useState(-1);
   const [openSubmenus, setOpenSubmenus] = useState([]);
+  
   const headerRef = useRef(null);
   const menuRef = useRef(null);
+
+  // ✅ Smart Active Detection
+  useEffect(() => {
+    // اگه کاربر initialActiveItem داده و autoDetect خاموش باشه
+    if (initialActiveItem && ! autoDetectActive) {
+      setActiveItem(initialActiveItem);
+      return;
+    }
+
+    if (! autoDetectActive || typeof window === 'undefined') return;
+
+    const detectActiveItem = () => {
+      const currentPath = window.location. pathname;
+      
+      // ✅ اول از custom mapping استفاده کن
+      if (urlToLabelMapping && urlToLabelMapping[currentPath]) {
+        const mappedLabel = urlToLabelMapping[currentPath];
+        setActiveItem(mappedLabel);
+        if (onActiveChange) {
+          onActiveChange(mappedLabel);
+        }
+        return;
+      }
+      
+      // ✅ بعد از menuItems خودکار تشخیص بده
+      for (const item of menuItems) {
+        if (item.link === currentPath) {
+          setActiveItem(item. label);
+          if (onActiveChange) {
+            onActiveChange(item.label);
+          }
+          return;
+        }
+        
+        // Check submenus
+        if (item. submenus) {
+          for (const sub of item.submenus) {
+            if (sub.link === currentPath) {
+              setActiveItem(sub.label);
+              if (onActiveChange) {
+                onActiveChange(sub.label);
+              }
+              return;
+            }
+          }
+        }
+      }
+      
+      // ✅ اگه پیدا نکرد، اولین item رو active کن
+      if (menuItems.length > 0 && !activeItem) {
+        setActiveItem(menuItems[0].label);
+        if (onActiveChange) {
+          onActiveChange(menuItems[0].label);
+        }
+      }
+    };
+
+    // Detect on mount
+    detectActiveItem();
+
+    // Listen for URL changes
+    const handleUrlChange = () => {
+      setTimeout(detectActiveItem, 0);
+    };
+
+    window.addEventListener('popstate', handleUrlChange);
+    
+    // Listen for programmatic navigation (SPA)
+    const originalPushState = window.history.pushState;
+    const originalReplaceState = window.history.replaceState;
+    
+    window. history.pushState = function(...args) {
+      originalPushState.apply(window.history, args);
+      handleUrlChange();
+    };
+    
+    window.history.replaceState = function(...args) {
+      originalReplaceState.apply(window. history, args);
+      handleUrlChange();
+    };
+
+    return () => {
+      window.removeEventListener('popstate', handleUrlChange);
+      window.history. pushState = originalPushState;
+      window.history.replaceState = originalReplaceState;
+    };
+  }, [menuItems, autoDetectActive, urlToLabelMapping, initialActiveItem, onActiveChange, activeItem]);
+
+  // ✅ Manual initialActiveItem update
+  useEffect(() => {
+    if (initialActiveItem && !autoDetectActive) {
+      setActiveItem(initialActiveItem);
+    }
+  }, [initialActiveItem, autoDetectActive]);
 
   const processMenuItems = (items) => {
     if (!activeItem) return items;
@@ -83,8 +189,8 @@ const Header = ({
   
   const filteredMenuItems = searchTerm
     ? processedMenuItems.filter((item) =>
-        item.label.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        (item.submenus?.some(sub => 
+        item.label.toLowerCase(). includes(searchTerm.toLowerCase()) ||
+        (item.submenus?. some(sub => 
           sub.label.toLowerCase(). includes(searchTerm.toLowerCase())
         ))
       )
@@ -100,13 +206,13 @@ const Header = ({
     }
     
     if (e.key === "ArrowDown") {
-      e.preventDefault();
+      e. preventDefault();
       setFocusedIndex(prev => 
         prev < filteredMenuItems.length - 1 ? prev + 1 : 0
       );
     }
     
-    if (e. key === "ArrowUp") {
+    if (e.key === "ArrowUp") {
       e.preventDefault();
       setFocusedIndex(prev => 
         prev > 0 ? prev - 1 : filteredMenuItems.length - 1
@@ -129,6 +235,71 @@ const Header = ({
     });
   };
 
+  // ✅ Advanced Submenu Item Click Handler
+  const handleSubmenuItemClick = async (parentLabel, subItem, event) => {
+    let shouldPreventDefault = false;
+    
+    try {
+      // Close submenu
+      setOpenSubmenus(prev => prev.filter(label => label !== parentLabel));
+      
+      // ✅ Update active item only if not auto-detecting
+      if (!autoDetectActive) {
+        setActiveItem(subItem. label);
+      }
+      
+      // Create comprehensive menu data
+      const menuInfo = {
+        ...subItem,
+        timestamp: new Date().toISOString(),
+        level: 2,
+        parentLabel,
+        currentUrl: typeof window !== 'undefined' ? window.location.href : '',
+        userAgent: typeof window !== 'undefined' ? window.navigator.userAgent : ''
+      };
+      
+      // Call external callback
+      if (onMenuClick) {
+        const result = await onMenuClick(event, menuInfo);
+        
+        // Check return value for control
+        if (typeof result === 'boolean' && result === false) {
+          shouldPreventDefault = true;
+        }
+        
+        if (typeof result === 'object' && result !== null) {
+          if (result.preventDefault === true) {
+            shouldPreventDefault = true;
+          }
+        }
+      }
+      
+      // ✅ Manual mode callback
+      if (! autoDetectActive && onActiveChange) {
+        onActiveChange(subItem.label);
+      }
+      
+    } catch (error) {
+      console.error('Header submenu click error:', error);
+      
+      if (onError) {
+        onError(error, subItem);
+      }
+    }
+    
+    // Apply control
+    if (shouldPreventDefault) {
+      event.preventDefault();
+    }
+    
+    // Close mobile menu if needed
+    if (! subItem.keepOpen) {
+      setTimeout(() => setMobileOpen(false), 150);
+    }
+    
+    return shouldPreventDefault;
+  };
+
   const trackMenuClick = (item, level = 1) => {
     if (enableAnalytics && typeof window !== 'undefined' && window.gtag) {
       window.gtag('event', 'menu_click', {
@@ -139,28 +310,92 @@ const Header = ({
     }
   };
 
-useEffect(() => {
-  const handleClickOutside = (event) => {
-    const burgerButton = headerRef.current?.querySelector('.burger');
+  // ✅ Advanced Internal Menu Click Handler
+  const handleInternalMenuClick = async (item, event) => {
+    let shouldPreventDefault = false;
+    let shouldStopPropagation = false;
     
-    if (burgerButton?.contains(event.target)) {
-      return;
+    try {
+      // ✅ Update active item only if not auto-detecting
+      if (!autoDetectActive) {
+        setActiveItem(item.label);
+      }
+      
+      // Create comprehensive menu data
+      const menuInfo = {
+        ...item,
+        timestamp: new Date().toISOString(),
+        level: 1,
+        currentUrl: typeof window !== 'undefined' ? window.location.href : '',
+        userAgent: typeof window !== 'undefined' ? window. navigator.userAgent : ''
+      };
+      
+      // Call external callback
+      if (onMenuClick) {
+        const result = await onMenuClick(event, menuInfo);
+        
+        // Check return value for control
+        if (typeof result === 'boolean' && result === false) {
+          shouldPreventDefault = true;
+        }
+        
+        if (typeof result === 'object' && result !== null) {
+          if (result.preventDefault === true) {
+            shouldPreventDefault = true;
+          }
+          if (result.stopPropagation === true) {
+            shouldStopPropagation = true;
+          }
+        }
+      }
+      
+      // ✅ Manual mode callback
+      if (!autoDetectActive && onActiveChange) {
+        onActiveChange(item.label);
+      }
+      
+    } catch (error) {
+      console.error('Header menu click error:', error);
+      
+      if (onError) {
+        onError(error, item);
+      }
     }
     
-    if (menuRef.current && !menuRef.current.contains(event.target)) {
-      setMobileOpen(false);
-      setOpenSubmenus([]);
+    // Apply control actions
+    if (shouldPreventDefault) {
+      event.preventDefault();
     }
+    
+    if (shouldStopPropagation) {
+      event. stopPropagation();
+    }
+    
+    return { shouldPreventDefault, shouldStopPropagation };
   };
 
-  document.addEventListener("mousedown", handleClickOutside);
-  document.addEventListener("keydown", handleKeyDown);
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      const burgerButton = headerRef.current?. querySelector('.burger');
+      
+      if (burgerButton?. contains(event.target)) {
+        return;
+      }
+      
+      if (menuRef.current && !menuRef.current.contains(event.target)) {
+        setMobileOpen(false);
+        setOpenSubmenus([]);
+      }
+    };
 
-  return () => {
-    document.removeEventListener("mousedown", handleClickOutside);
-    document.removeEventListener("keydown", handleKeyDown);
-  };
-}, [handleKeyDown]);
+    document.addEventListener("mousedown", handleClickOutside);
+    document.addEventListener("keydown", handleKeyDown);
+
+    return () => {
+      document. removeEventListener("mousedown", handleClickOutside);
+      document. removeEventListener("keydown", handleKeyDown);
+    };
+  }, [handleKeyDown]);
 
   const headerClasses = [
     styles.header,
@@ -172,7 +407,7 @@ useEffect(() => {
       ref={headerRef}
       className={headerClasses} 
       data-theme={theme}
-      {... props}
+      {...props}
     >
       <div className={styles.container}>
         {logo && (
@@ -228,7 +463,8 @@ useEffect(() => {
                 key={`${item.label}-${idx}`}
                 item={item} 
                 onClose={() => setMobileOpen(false)}
-                onMenuClick={onMenuClick}
+                onMenuClick={handleInternalMenuClick}
+                onSubmenuItemClick={handleSubmenuItemClick}
                 trackClick={trackMenuClick}
                 isFocused={focusedIndex === idx}
                 openSubmenus={openSubmenus}
@@ -253,6 +489,7 @@ const MenuItem = ({
   item, 
   onClose, 
   onMenuClick,
+  onSubmenuItemClick,
   trackClick,
   isFocused = false,
   openSubmenus = [],
@@ -265,7 +502,7 @@ const MenuItem = ({
   const menuItemRef = useRef(null);
 
   useEffect(() => {
-    if (isFocused && menuItemRef.current) {
+    if (isFocused && menuItemRef. current) {
       menuItemRef.current.focus();
     }
   }, [isFocused]);
@@ -286,7 +523,12 @@ const MenuItem = ({
     if (onMenuClick) {
       setIsLoading(true);
       try {
-        await onMenuClick(item, e);
+        const result = await onMenuClick(item, e);
+        
+        // Check if navigation should be prevented
+        if (result && (result.shouldPreventDefault || result === false)) {
+          // Navigation was handled by callback
+        }
       } finally {
         setIsLoading(false);
       }
@@ -298,7 +540,7 @@ const MenuItem = ({
   };
 
   const handleKeyDown = (e) => {
-    if (e. key === "Enter" || e.key === " ") {
+    if (e.key === "Enter" || e.key === " ") {
       e.preventDefault();
       handleMenuClick(e);
     }
@@ -357,18 +599,18 @@ const MenuItem = ({
           disabled={isLoading}
         >
           {item.icon && (
-            <span className={styles. icon}>
+            <span className={styles.icon}>
               {getIcon(item.icon)}
             </span>
           )}
           <span className={styles.label}>{item.label}</span>
           {item.badge && (
-            <span className={`${styles.badge} ${styles[`badge-${item.badge.type || 'default'}`]}`}>
+            <span className={`${styles. badge} ${styles[`badge-${item.badge.type || 'default'}`]}`}>
               {item.badge.text}
             </span>
           )}
           {isLoading && (
-            <span className={styles.spinner}>
+            <span className={styles. spinner}>
               <LucideIcons.Loader2 size={16} />
             </span>
           )}
@@ -376,20 +618,16 @@ const MenuItem = ({
       )}
       
       {hasSubmenus && (
-        <ul className={styles. submenu} role="menu">
+        <ul className={styles.submenu} role="menu">
           {item.submenus.map((sub, idx) => (
-            <li key={`${sub.label}-${idx}`} className={styles.item}>
+            <li key={`${sub.label}-${idx}`} className={styles. item}>
               {sub.link ?  (
                 <a
                   href={sub.link}
                   className={styles.link}
                   onClick={async (e) => {
-                    if (onMenuClick) {
-                      await onMenuClick(sub, e);
-                    }
-                    if (onClose && !sub.keepOpen) {
-                      onClose();
-                    }
+                    trackClick?.(sub, 2);
+                    await onSubmenuItemClick?.(item.label, sub, e);
                   }}
                 >
                   {sub.icon && (
@@ -397,7 +635,7 @@ const MenuItem = ({
                       {getIcon(sub.icon)}
                     </span>
                   )}
-                  <span className={styles.label}>{sub.label}</span>
+                  <span className={styles.label}>{sub. label}</span>
                   {sub.badge && (
                     <span className={`${styles.badge} ${styles[`badge-${sub.badge.type || 'default'}`]}`}>
                       {sub.badge. text}
@@ -408,9 +646,8 @@ const MenuItem = ({
                 <button
                   className={styles.link}
                   onClick={async (e) => {
-                    if (onMenuClick) {
-                      await onMenuClick(sub, e);
-                    }
+                    trackClick?.(sub, 2);
+                    await onSubmenuItemClick?.(item.label, sub, e);
                   }}
                 >
                   {sub.icon && (

@@ -17,7 +17,7 @@ const ScrollToTop = ({
   const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
-    if (! show) return;
+    if (!  show) return;
 
     const toggleVisibility = () => {
       if (window.pageYOffset > 300) {
@@ -63,7 +63,6 @@ const FooterColumn = ({ title, children, className = "" }) => {
 
   return (
     <div className={`${styles.column} ${className}`}>
-      {/* ✅ Accordion Button - CSS تعیین میکنه کی نمایش داده بشه */}
       <button
         className={styles.columnHeader}
         onClick={() => setIsExpanded(!isExpanded)}
@@ -76,10 +75,6 @@ const FooterColumn = ({ title, children, className = "" }) => {
         />
       </button>
       
-      {/* ✅ Static Title - برای non-accordion layouts */}
-      <h3 className={styles.columnTitleStatic}>{title}</h3>
-      
-      {/* ✅ Content */}
       <div className={`${styles.columnContent} ${isExpanded ? styles.show : ""}`}>
         {children}
       </div>
@@ -94,7 +89,7 @@ const FooterLink = ({
   external = false, 
   onClick, 
   className = "",
-  active = false
+  active = false  // ✅ اضافه شده
 }) => {
   const handleClick = async (e) => {
     let shouldPreventDefault = false;
@@ -107,7 +102,7 @@ const FooterLink = ({
           external,
           label: children,
           icon,
-          active
+          active  // ✅ اضافه شده
         });
         
         if (typeof result === 'boolean' && result === false) {
@@ -137,7 +132,7 @@ const FooterLink = ({
   };
 
   const linkProps = {
-    className: `${styles.link} ${active ? styles.active : ""} ${className}`,
+    className: `${styles.link} ${active ? styles.active : ""} ${className}`,  // ✅ active class
     onClick: handleClick
   };
 
@@ -176,38 +171,35 @@ const Footer = ({
   scrollPosition = "floating",
   scrollAlignment = "right",
   theme = "auto",
-  className = "",  // ✅ Custom CSS classes
+  className = "",
   children,
   
-  // State Management - Enhanced
-  autoDetectActive = true,
-  urlToLabelMapping = null,
-  initialActiveItem = null,
+  autoDetectActive = true,         // Auto-detect active item from URL
+  urlToLabelMapping = null,        // Custom URL to label mapping
+  initialActiveItem = null,        // Manual initial active item
   
-  // Callbacks
+  // Callbacks - External
   onLinkClick = null,
   onError = null,
-  onActiveChange = null,
+  onActiveChange = null, 
   
   ...props
 }) => {
-  const [activeItem, setActiveItem] = useState(null);
+  const [activeItem, setActiveItem] = useState(null); 
   const footerRef = useRef(null);
   const validColumns = Math.min(Math.max(1, columns), 5);
   
-  // ✅ Smart Active Detection
   useEffect(() => {
-    if (initialActiveItem && ! autoDetectActive) {
+    if (initialActiveItem && !  autoDetectActive) {
       setActiveItem(initialActiveItem);
       return;
     }
 
-    if (! autoDetectActive || typeof window === 'undefined') return;
+    if (!  autoDetectActive || typeof window === 'undefined') return;
 
     const detectActiveItem = () => {
       const currentPath = window.location.pathname;
       
-      // Custom mapping اول
       if (urlToLabelMapping && urlToLabelMapping[currentPath]) {
         const mappedLabel = urlToLabelMapping[currentPath];
         setActiveItem(mappedLabel);
@@ -217,7 +209,6 @@ const Footer = ({
         return;
       }
       
-      // از data خودکار تشخیص بده
       for (const column of data) {
         if (column.links) {
           for (const link of column.links) {
@@ -261,14 +252,14 @@ const Footer = ({
     };
   }, [data, autoDetectActive, urlToLabelMapping, initialActiveItem, onActiveChange]);
 
-  // Manual initialActiveItem update
+  // ✅ Manual initialActiveItem update
   useEffect(() => {
-    if (initialActiveItem && !autoDetectActive) {
+    if (initialActiveItem && ! autoDetectActive) {
       setActiveItem(initialActiveItem);
     }
   }, [initialActiveItem, autoDetectActive]);
 
-  // Process data با active states
+  // ✅ Process data با active states
   const processedData = data.map(column => ({
     ...column,
     links: column.links?.map(link => ({
@@ -292,7 +283,7 @@ const Footer = ({
     });
   };
 
-  // Advanced Link Handler
+  // ✅ Advanced Link Handler (بهبود یافته)
   const handleInternalLinkClick = async (event, linkData) => {
     let shouldPreventDefault = false;
     
@@ -308,13 +299,14 @@ const Footer = ({
         timestamp: new Date().toISOString(),
         userAgent: typeof window !== 'undefined' ? window.navigator.userAgent : '',
         currentUrl: typeof window !== 'undefined' ? window.location.href : '',
-        level: 'footer'
+        level: 'footer' 
       };
       
       // Call external callback with full context
       if (onLinkClick) {
         const result = await onLinkClick(event, linkInfo);
         
+        // Check return value for control
         if (typeof result === 'boolean' && result === false) {
           shouldPreventDefault = true;
         }
@@ -329,7 +321,7 @@ const Footer = ({
       }
       
       // Manual mode callback
-      if (! autoDetectActive && onActiveChange) {
+      if (!  autoDetectActive && onActiveChange) {
         onActiveChange(linkData.label);
       }
       
@@ -346,12 +338,11 @@ const Footer = ({
     }
   };
 
-  // ✅ Enhanced CSS classes با enhanceClasses
-  const footerClasses = enhanceClasses([
-    'footer',
-    `columns-${validColumns}`,
+  const footerClasses = [
+    styles.footer,
+    styles[`columns-${validColumns}`],
     className
-  ].filter(Boolean).join(" "), styles);
+  ].filter(Boolean).join(" ");
 
   return (
     <>
@@ -383,7 +374,7 @@ const Footer = ({
                         href={link.href}
                         icon={link.icon}
                         external={link.external}
-                        active={link.active}
+                        active={link.active} 
                         onClick={(event, linkData) => handleInternalLinkClick(event, { ...linkData, ...link })}
                         className={link.className}
                       >
